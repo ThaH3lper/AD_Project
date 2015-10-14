@@ -22,3 +22,6 @@ Datastrukturer:
  #Check# - Ersätta alla Listor med egna listor
  #Check# (Keybindings) - Fler ställen att använda hashtable?
 #Check# - Graf -> A* för AI:n
+
+Keff:
+- Kunna döda...
