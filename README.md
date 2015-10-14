@@ -13,7 +13,7 @@ Weapon/Ammo:
 - Skott spawnsa random på kartan
 
 AI:
-- Ai gubbar spawnas random på kartan på "spawn tiles"
+#Check# - Ai gubbar spawnas random på kartan på "spawn tiles"
 #Check# - Ai går mot spelaren enligt A*
 #Ischh# - Om Ai ser spelaren skjuter den samtidigt som den går, Om den inte ser siktar den bara i färdrikningen
 - När AI:n nåt spelaren inom X radius stannar den och skjuter på spelaren

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Patrik.GameProject;
+using System;
 
 namespace Game1.Entitys
 {
@@ -18,6 +19,25 @@ namespace Game1.Entitys
         {
             base.Update(delta);
 
+
+            if (world.RayCast(GetPosition(), world.Player.GetPosition()))
+            {
+                Face(world.Player.GetPosition());
+                Fire();
+            }
+            else
+            {
+                rotation = (float)Math.Atan2(direction.Y, direction.X);
+            }
+
+            float dst = (world.Player.GetPosition() - position).Length();
+            if (dst < Tile.SIZE * 2.6f)
+            {
+                target = Vector2.Zero;
+                return;
+            }
+
+
             if (target != Vector2.Zero && (target - position).Length() > 2)
             {
                 float range = (target - position).Length();
@@ -27,21 +47,16 @@ namespace Game1.Entitys
 
             }
             else
-                RebuildPath();
-
-            Face(world.Player.GetPosition());
-
-            if (world.RayCast(GetPosition(), world.Player.GetPosition()))
             {
-                Fire();
+                RebuildPath();
             }
         }
 
         private void RebuildPath()
         {
-            var path = world.PathFinder.Pathfind(((position ) / Tile.SIZE).ToPoint(), ((world.Player.GetPosition() ) / Tile.SIZE).ToPoint()); //- new Vector2(Tile.SIZE/2f) , new Vector2(Tile.SIZE / 2f)
+            var path = world.PathFinder.Pathfind(((position) / Tile.SIZE).ToPoint(), ((world.Player.GetPosition()) / Tile.SIZE).ToPoint()); //- new Vector2(Tile.SIZE/2f) , new Vector2(Tile.SIZE / 2f)
             if (path.Count > 1)
-                target = path[1].ToVector2() * Tile.SIZE  + new Vector2(Tile.SIZE/2f);
+                target = path[1].ToVector2() * Tile.SIZE + new Vector2(Tile.SIZE / 2f);
         }
     }
 }
