@@ -28,16 +28,12 @@ namespace Patrik.GameProject
 
         public virtual void Update(float delta)
         {
-            //position += direction * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
         }
 
         public virtual void Draw(SpriteBatch batch)
         {
-            batch.Draw(texture, position, recDraw, Color.Red, rotation, new Vector2(32, 32), scale, SpriteEffects.None, 1.0f);
-
-            //Debug collision:
-            //batch.Draw(Globals.dot, recHit, Color.FromNonPremultiplied(new Vector4(0f, 0f, 0f, 0.5f)));
+            batch.Draw(texture, position, recDraw, Color.Red, rotation, originDraw, scale, SpriteEffects.None, 1.0f);
         }
 
         public Vector2 GetPosition() { return position; }

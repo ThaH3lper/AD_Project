@@ -11,20 +11,23 @@ namespace Patrik.GameProject
     {
         Player player;
         Vector2 position;
+        Hud hud;
 
-        public Aim(Player player)
+        public Aim(Player player, Hud hud)
         {
             this.player = player;
+            this.hud = hud;
         }
 
         public void Update(float delta)
         {
-            position = player.PosAim;
+            position = hud.WorldToHudPosition(player.PosAim);
         }
 
         public void Draw(SpriteBatch batch)
         {
-            //batch.Draw()
+            batch.Draw(Globals.aim, position, new Rectangle(32 * 16, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
+            batch.Draw(Globals.aim, position, new Rectangle(0 * 16, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
         }
     }
 }
