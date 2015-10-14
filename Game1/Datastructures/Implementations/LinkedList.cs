@@ -27,7 +27,7 @@ namespace Game1.Datastructures.Implementations
         private Node Head { get; set; }
 
         public int Count { get; set; }
-       
+
 
         public T this[int i]
         {
@@ -88,17 +88,32 @@ namespace Game1.Datastructures.Implementations
 
         public void Remove(T item)
         {
+            Node foundNode = null;
+            Node prevNode = Head.Next;
             var node = Head;
             while (node != null)
             {
                 if (node.Data.Equals(item))
+                {
+                    foundNode = node;
                     break;
+                }
+                prevNode = node;
                 node = node.Next;
             }
 
-            node.Data = node.Next.Data;
-            Node tempNode = node.Next.Next;
-            node.Next = tempNode;
+
+            if (foundNode == null)
+                return;
+
+            if (foundNode == Head)
+            {
+                Head = Head.Next;
+            } else
+            {
+                prevNode.Next = foundNode.Next;
+            }
+
             Count--;
         }
 

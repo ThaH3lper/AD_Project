@@ -7,14 +7,16 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    class Bullet
+    public class Bullet
     {
         private static Rectangle recDraw = new Rectangle(0, 0, 10, 5);
         private static float SPEED = 1600;
-        float rotation, scale;
+        float rotation, scale, time;
         Texture2D texture;
         Vector2 position, origin, direction;
-        
+
+        public bool Dead { get; private set; }
+
         public Bullet(Entity shooter)
         {
             rotation = shooter.GetRotation();
@@ -28,6 +30,14 @@ namespace Patrik.GameProject
 
         public void Update(float delta)
         {
+            time += delta;
+
+            // remove after time T
+            if (time > 0.1f)
+            {
+                Dead = true;
+            }
+
             position += direction * SPEED * delta;
         }
 
@@ -35,5 +45,7 @@ namespace Patrik.GameProject
         {
             batch.Draw(texture, position, recDraw, Color.Yellow, rotation, origin, scale, SpriteEffects.None, 1f);
         }
+
+        public float GetTime() { return time;  }
     }
 }
