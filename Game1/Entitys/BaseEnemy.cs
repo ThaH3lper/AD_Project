@@ -8,11 +8,12 @@ namespace Game1.Entitys
 {
     public class BaseEnemy : Entity
     {
-        Vector2 target;
+        public static readonly float ENEMY_STOP_RANGE = Tile.SIZE * 2.1f;
+
+        private Vector2 target;
 
         public BaseEnemy(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, world)
         {
-
         }
 
         public override void Update(float delta)
@@ -31,9 +32,10 @@ namespace Game1.Entitys
             }
 
             float dst = (world.Player.GetPosition() - position).Length();
-            if (dst < Tile.SIZE * 2.6f)
+            if (dst < ENEMY_STOP_RANGE)
             {
                 target = Vector2.Zero;
+                direction = Vector2.Zero;
                 return;
             }
 
