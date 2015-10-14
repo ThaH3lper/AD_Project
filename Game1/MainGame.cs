@@ -19,7 +19,6 @@ namespace Patrik.GameProject
             graphics.ApplyChanges();
 
             Window.Title = Globals.TITLE;
-            IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
         }

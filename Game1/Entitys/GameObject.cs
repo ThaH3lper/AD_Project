@@ -34,7 +34,6 @@ namespace Patrik.GameProject
         public virtual void Draw(SpriteBatch batch)
         {
             batch.Draw(texture, position, recDraw, Color.Red, rotation, originDraw, scale, SpriteEffects.None, 1.0f);
-            batch.Draw(Globals.dot, recHit, Color.Black);
         }
 
         public Vector2 GetPosition() { return position; }

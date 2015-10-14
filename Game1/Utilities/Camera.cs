@@ -12,7 +12,7 @@ namespace Patrik.GameProject
         private Matrix transform;
         private Vector2 position;
         private float rotation, zoomX, zoomY, lerp = 0.1f;
-        private Viewport viewPort;
+        public Viewport viewPort { get; private set; }
 
         public Camera (Viewport viewPort, Vector2 position)
         {

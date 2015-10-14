@@ -49,6 +49,7 @@
     <Compile Include="Entitys\BaseEnemy.cs" />
     <Compile Include="Entitys\Collision\Segment.cs" />
     <Compile Include="Entitys\Player.cs" />
+    <Compile Include="Hud.cs" />
     <Compile Include="Map\ETileType.cs" />
     <Compile Include="Scene\EScene.cs" />
     <Compile Include="Scene\GameScene.cs" />

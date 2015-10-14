@@ -14,16 +14,19 @@ namespace Patrik.GameProject
     {
 
         SimulationWorld world;
+        Hud hud;
 
         public GameScene(GraphicsDeviceManager gdm, MainGame game) : base(gdm, game)
         {
             this.world = new SimulationWorld(input);
+            this.hud = new Hud(camera, hudCamera, world);
         }
 
       
         public override void Update(float delta)
         {
             world.Update(delta);
+            hud.Update(delta);
             UpdateCamera();
 
             base.Update(delta);
@@ -49,6 +52,10 @@ namespace Patrik.GameProject
                 enemy.Draw(batch);
             }
 
+            batch.End();
+
+            batch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, hudCamera.Transform);
+            hud.Render(batch);
             batch.End();
         }
     }
