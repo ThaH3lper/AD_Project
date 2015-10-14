@@ -32,6 +32,7 @@ namespace Patrik.GameProject
         {
             this.direction = direction;
         }
+
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);
@@ -65,6 +66,11 @@ namespace Patrik.GameProject
                 position.X = rec.X - originHit.X;
             else if (direction.X < 0)
                 position.X = rec.X + rec.Width + originHit.X;
+        }
+
+        public void Face(Vector2 target)
+        {
+            rotation = (float)Math.Atan2(target.Y - position.Y, target.X - position.X);
         }
     }
 }

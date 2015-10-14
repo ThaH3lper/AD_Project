@@ -11,5 +11,17 @@ namespace Game1.Entitys
         {
 
         }
+
+        public override void Update(float delta)
+        {
+            base.Update(delta);
+
+            Face(world.Player.GetPosition());
+
+            if (world.RayCast(GetPosition(), world.Player.GetPosition()))
+            {
+                world.SpawnBullet(this);
+            }
+        }
     }
 }

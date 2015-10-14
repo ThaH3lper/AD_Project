@@ -49,6 +49,7 @@ namespace Game1.Scene
         {
             UpdateCollisionCuller();
             UpdatePlayer(delta);
+            UpdateEnemies(delta);
             UpdateBullets(delta);
 
             //var nearby = collisionCuller.GetPossibleColliders(player);
@@ -72,12 +73,18 @@ namespace Game1.Scene
                 }
             }
 
+            // Should enemies block raycast?
             foreach (var enemy in Enemies)
             {
                 //  if (segment.Collide(enemy.GetHitRectangle()))
                 //     return false;
             }
             return true;
+        }
+
+        public void SpawnBullet(Entity owner)
+        {
+            BulletManager.addBullet(owner);
         }
 
         /// <summary>
@@ -88,6 +95,14 @@ namespace Game1.Scene
             collisionCuller.ClearBuckets();
             collisionCuller.AddObject(Player);
             collisionCuller.AddObject(Enemies);
+        }
+
+        private void UpdateEnemies(float delta)
+        {
+            foreach (var enemy in Enemies)
+            {
+                enemy.Update(delta);
+            }
         }
 
         private void UpdatePlayer(float delta)
