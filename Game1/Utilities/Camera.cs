@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    class Camera
+    public class Camera
     {
         private Matrix transform;
         private Vector2 position;

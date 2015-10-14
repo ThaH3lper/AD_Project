@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    class StandardScene
+    public class StandardScene
     {
         protected Camera camera;
         protected Camera hudCamera;

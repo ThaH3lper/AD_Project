@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.Scene;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -8,15 +9,14 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    class Entity : GameObject
+    public class Entity : GameObject
     {
-        protected Map map;
+        protected SimulationWorld world;
        
 
-        public Entity(Texture2D texture, Vector2 position, float speed, int size, Map map) : base(texture, position, speed, size, new Rectangle(0, 0, 64, 64))
+        public Entity(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, new Rectangle(0, 0, 64, 64))
         {
-            this.map = map;
-           
+            this.world = world;
         }
 
         public override void Update(float delta)
@@ -42,7 +42,7 @@ namespace Patrik.GameProject
             position.Y += direction.Y * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
 
-            Tile colliding = map.GetCollidingTile(recHit);
+            Tile colliding = world.Map.GetCollidingTile(recHit);
             if (colliding == null)
                 return;
             Rectangle rec = colliding.GetRecHit();
@@ -51,12 +51,13 @@ namespace Patrik.GameProject
             else if (direction.Y < 0)
                 position.Y = rec.Y + rec.Height + originHit.Y;
         }
+
         public void HorizontalMove(float delta)
         {
             position.X += direction.X * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
 
-            Tile colliding = map.GetCollidingTile(recHit);
+            Tile colliding = world.Map.GetCollidingTile(recHit);
             if (colliding == null)
                 return;
             Rectangle rec = colliding.GetRecHit();

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Patrik.GameProject
 {
-    class Tile
+    public class Tile
     {
         public static int SIZE = 64;
 

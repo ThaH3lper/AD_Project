@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Patrik.GameProject
 {
-    class Inputs
+    public class Inputs
     {
         private Camera camera, cameraHud;
         private KeyboardState keyState, oldKeyState = Keyboard.GetState();

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Patrik.GameProject
 {
-    class BulletManager
+   public class BulletManager
     {
         private IList<Bullet> bullets;
 

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Patrik.GameProject
 {
-    struct TileData
+    public struct TileData
     {
         public Texture2D Texture { get; private set; }
         public ETileType Type { get; private set; }

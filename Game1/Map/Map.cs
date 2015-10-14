@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Patrik.GameProject
 {
-    class Map
+    public class Map
     {
         private Tile[,] tileMap;
         public Map(int width, int height, char[,] charMap)

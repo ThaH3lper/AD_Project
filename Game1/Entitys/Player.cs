@@ -1,10 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.Scene;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Patrik.GameProject
 {
-    class Player : Entity
+   public class Player : Entity
     {
         public enum Commands
         {
@@ -14,7 +15,7 @@ namespace Patrik.GameProject
         private Inputs input;
         protected Vector2 posAim;
 
-        public Player(Vector2 position, Map map, Inputs input) : base(Globals.player, position, 250, 40, map)
+        public Player(Vector2 position, SimulationWorld world, Inputs input) : base(Globals.player, position, 250, 40, world)
         {
             this.input = input;
             posAim = position;
@@ -33,6 +34,7 @@ namespace Patrik.GameProject
                 dir.X += 1;
             if (dir.X != 0)
                 dir.Normalize();
+
             Move(dir);
 
             posAim = input.GetPosCamera();

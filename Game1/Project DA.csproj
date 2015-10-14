@@ -54,6 +54,7 @@
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Tile.cs" />
     <Compile Include="Map\TileData.cs" />
+    <Compile Include="Scene\SimulationWorld.cs" />
     <Compile Include="Scene\StandardScene.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Entitys\Entity.cs" />

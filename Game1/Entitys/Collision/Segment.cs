@@ -48,7 +48,7 @@ namespace Patrik.GameProject
         public bool Collide(Rectangle obj)
         {
             float dst = DistanceFromPointToLineSegment(obj.Location.ToVector2(), start, end);
-            if (dst <= Math.Max(obj.Width, obj.Height) / 3.2f)
+            if (dst <= Math.Max(obj.Width, obj.Height) / 3.1f)
             {
                 return true;
             }

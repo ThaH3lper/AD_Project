@@ -2,7 +2,7 @@
 
 namespace Game1.Datastructures.ADT
 {
-    interface IList<T> : IEnumerable<T>
+    public interface IList<T> : IEnumerable<T>
     {
         int Count { get; set; }
 
