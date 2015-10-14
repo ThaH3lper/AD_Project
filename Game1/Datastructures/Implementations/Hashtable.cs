@@ -2,27 +2,29 @@
  * Patrik Nilsson, TGSPA
  * ae3210, DA404A
  */
+using Game1.Datastructures.ADT;
+using Game1.Datastructures.Implementations;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
-namespace Hashtabell_Patrik_Nilsson
+namespace Patrik.GameProject.Datastructures.Implementations
 {
     /// <summary>
     /// Hashtable is containing all the methods and LinkedLists that the hashtable needs.
     /// </summary>
     /// <typeparam name="K">Type of the key.</typeparam>
     /// <typeparam name="T">Type of the value</typeparam>
-    class Hashtable<K, T>
+    class Hashtable<K, T> : IMap<K, T>
     {
         /// <summary>
         /// Order of the values inserted to the hashtable. Doesn't remove insertions!
         /// </summary>
-        private LinkedList<T> insertionOrder = new LinkedList<T>();
+        private IList<T> insertionOrder = new LinkedList<T>();
 
         /// <summary>
         /// Table is an array with fixed size and contains LinkedLists.
         /// </summary>
-        private LinkedList<Entry<K, T>>[] table;
+        private IList<Entry<K, T>>[] table;
 
         /// <summary>
         /// Returns the amount of entrys in insertionOrder.
@@ -63,7 +65,8 @@ namespace Hashtabell_Patrik_Nilsson
             int hashIndex = HashIndex(key);
             if(table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
             {
-                Entry<K, T> entry = table[hashIndex].Find(new Entry<K, T>(key, default(T))).Value;
+               // Entry<K, T> entry = table[hashIndex].Where(new Entry<K, T>(key, default(T))).Value;
+                var entry = table[hashIndex].SingleOrDefault(x => x.key.Equals(key));
                 return entry.value;
             }
             return default(T);
@@ -79,8 +82,8 @@ namespace Hashtabell_Patrik_Nilsson
             int hashIndex = HashIndex(key);
             if (table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
                 return false;
-            table[hashIndex].AddLast(new Entry<K, T>(key, value));
-            insertionOrder.AddLast(value);
+            table[hashIndex].Add(new Entry<K, T>(key, value));
+            insertionOrder.Add(value);
             return true;
         }
 
@@ -94,8 +97,9 @@ namespace Hashtabell_Patrik_Nilsson
             int hashIndex = HashIndex(key);
             if (table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
             {
-                Entry<K, T> entry = table[hashIndex].Find(new Entry<K, T>(key, default(T))).Value;
-                insertionOrder.Remove(entry.value);
+                var entry = table[hashIndex].SingleOrDefault(x => x.key.Equals(key));
+
+                // Remove it from the table
                 table[hashIndex].Remove(entry);
                 return true;
             }
@@ -107,7 +111,7 @@ namespace Hashtabell_Patrik_Nilsson
         /// values that are not longer existing in the hashtable.
         /// </summary>
         /// <returns>Returns a LinkedList of all values that have been inserted.</returns>
-        public LinkedList<T> GetInsertionOrder(){ return insertionOrder; }
+        public IList<T> GetInsertionOrder(){ return insertionOrder; }
 
         /// <summary>
         /// Prints out the hashtable and how its currently structured.
@@ -121,6 +125,55 @@ namespace Hashtabell_Patrik_Nilsson
                     s += " -> " + entry.value;
                 Console.WriteLine(s);
             }
+        }
+    }
+
+    /// <summary>
+    /// Entry is a object in the hashtable. Contains a key and a value. Key and Value can be any type.
+    /// </summary>
+    /// <typeparam name="K">Type on the key.</typeparam>
+    /// <typeparam name="T">Type on the value.</typeparam>
+    class Entry<K, T>
+    {
+        /// <summary>
+        /// Key to find this entry and get the value.
+        /// </summary>
+        public K key { get; private set; }
+
+        /// <summary>
+        /// Value of this entry.
+        /// </summary>
+        public T value { get; private set; }
+
+        /// <summary>
+        /// Constructor to create Entry.
+        /// </summary>
+        /// <param name="key">The key of the entry</param>
+        /// <param name="value">The value of the entry</param>
+        public Entry(K key, T value)
+        {
+            this.key = key;
+            this.value = value;
+        }
+
+        /// <summary>
+        /// Overrides the "Equals" operator. Makes us able to use LinkedList.Find() method.
+        /// </summary>
+        /// <param name="obj">The entry to compaire to.</param>
+        /// <returns>Return true if both keys are equal.</returns>
+        public override bool Equals(object obj)
+        {
+            Entry<K, T> entry = (Entry<K, T>)obj;
+            return key.Equals(entry.key);
+        }
+
+        /// <summary>
+        /// Visual studio complains about not implementing this method if you override "Equals".
+        /// </summary>
+        /// <returns>Returns hashcode</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

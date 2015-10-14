@@ -1,17 +1,16 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Game1.Datastructures.ADT;
+using Game1.Datastructures.Implementations;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Patrik.GameProject
 {
     class BulletManager
     {
-        List<Bullet> bullets;
+        private IList<Bullet> bullets;
+
         public BulletManager()
         {
-            bullets = new List<Bullet>();
+            bullets = new LinkedList<Bullet>();
         }
 
         public void addBullet(Entity shooter)

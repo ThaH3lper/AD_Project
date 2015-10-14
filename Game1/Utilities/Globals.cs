@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Hashtabell_Patrik_Nilsson;
 using Patrik.GameProject;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using System.IO;
 using System;
+using Game1.Datastructures.ADT;
+using Patrik.GameProject.Datastructures.Implementations;
+using Game1.Datastructures.Implementations;
 
 class Globals
 {
@@ -14,7 +15,7 @@ class Globals
     public static Texture2D player, gun, dot, create, bullet;
     public static Map map;
 
-    public static Hashtable<char, TileData> tileTable = new Hashtable<char, TileData>(4);
+    public static IMap<char, TileData> tileTable = new Hashtable<char, TileData>(4);
 
     public static void LoadContent(MainGame game)
     {
@@ -34,7 +35,7 @@ class Globals
 
     private static void loadMap(MainGame game)
     {
-        List<string> strings = new List<string>();
+        IList<string> strings = new LinkedList<string>();
         StreamReader sr = new StreamReader("Content/level.map");
         while (!sr.EndOfStream)
             strings.Add(sr.ReadLine());

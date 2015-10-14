@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using System;
+using Game1.Datastructures.Implementations;
+using Game1.Datastructures.ADT;
 
 namespace Patrik.GameProject
 {
@@ -24,9 +25,9 @@ namespace Patrik.GameProject
         {
             return keyState.IsKeyDown(key);
         }
-        public List<Keys> GetKeyPressed()
+        public IList<Keys> GetKeyPressed()
         {
-            List<Keys> keys = new List<Keys>();
+            IList<Keys> keys = new LinkedList<Keys>();
             foreach (Keys key in keyState.GetPressedKeys())
             {
                 if (oldKeyState.IsKeyUp(key))
