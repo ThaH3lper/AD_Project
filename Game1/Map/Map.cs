@@ -31,7 +31,7 @@ namespace Patrik.GameProject
             {
                 for (int x = 0; x < tileMap.GetLength(1); x++)
                 {
-                    if (tileMap[x, y].GetType() != ETileType.WALL && tileMap[x, y].GetType() != ETileType.CREATE)
+                    if (tileMap[x, y].GetTileType() != ETileType.WALL && tileMap[x, y].GetTileType() != ETileType.CRATE)
                         continue;
                     if (tileMap[x, y].GetRecHit().Intersects(rectangle))
                         return tileMap[x, y];

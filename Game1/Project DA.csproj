@@ -42,6 +42,7 @@
     <Compile Include="Bullets\BulletManager.cs" />
     <Compile Include="Datastructures\ADT\IList.cs" />
     <Compile Include="Datastructures\ADT\IMap.cs" />
+    <Compile Include="Datastructures\Algorithms\PathFinder.cs" />
     <Compile Include="Datastructures\Implementations\LinkedList.cs" />
     <Compile Include="Datastructures\SpatialHashGrid.cs" />
     <Compile Include="Entitys\BaseEnemy.cs" />

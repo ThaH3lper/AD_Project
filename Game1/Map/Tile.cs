@@ -11,6 +11,7 @@ namespace Patrik.GameProject
         Rectangle recHit;
         Texture2D texture;
         Color color;
+        bool passable; //todo
 
         public Tile(int x, int y, TileData data)
         {
@@ -27,6 +28,6 @@ namespace Patrik.GameProject
         }
 
         public Rectangle GetRecHit() { return recHit; }
-        public ETileType GetType() { return type; }
+        public ETileType GetTileType() { return type; }
     }
 }

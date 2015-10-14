@@ -1,5 +1,6 @@
 ﻿using Game1.Datastructures;
 using Game1.Datastructures.ADT;
+using Game1.Datastructures.Algorithms;
 using Game1.Datastructures.Implementations;
 using Game1.Entitys;
 using Microsoft.Xna.Framework;
@@ -20,6 +21,8 @@ namespace Game1.Scene
 
         public IList<BaseEnemy> Enemies { get; set; }
 
+        public PathFinder PathFinder { get; set; }
+
         private SpatialHashGrid collisionCuller;
         private Inputs input;
 
@@ -30,6 +33,7 @@ namespace Game1.Scene
             this.Player = new Player(new Vector2(100, 100), this, input);
             this.BulletManager = new BulletManager();
             this.Enemies = new LinkedList<BaseEnemy>();
+            this.PathFinder = new PathFinder(this);
             this.collisionCuller = new SpatialHashGrid();
             this.collisionCuller.Setup(Map.GetWidth() * Tile.SIZE, Map.GetHeight() * Tile.SIZE, (Map.GetWidth() * Tile.SIZE) / 6);
 
@@ -51,10 +55,6 @@ namespace Game1.Scene
             UpdatePlayer(delta);
             UpdateEnemies(delta);
             UpdateBullets(delta);
-
-            //var nearby = collisionCuller.GetPossibleColliders(player);
-            var canSee = RayCast(Enemies[1].GetPosition(), Player.GetPosition());
-            Console.WriteLine(canSee);
         }
 
         public bool RayCast(Vector2 origin, Vector2 target)
@@ -65,7 +65,7 @@ namespace Game1.Scene
             {
                 for (int x = 0; x < Map.getTileMap().GetLength(1); x++)
                 {
-                    if (Map.getTileMap()[x, y].GetType() != ETileType.WALL) // && Map.getTileMap()[x, y].GetType() != ETileType.CREATE)
+                    if (Map.getTileMap()[x, y].GetTileType() != ETileType.WALL) // && Map.getTileMap()[x, y].GetType() != ETileType.CREATE)
                         continue;
 
                     if (segment.Collide(Map.getTileMap()[x, y].GetRecHit()))

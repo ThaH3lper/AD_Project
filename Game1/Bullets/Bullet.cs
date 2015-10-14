@@ -33,7 +33,7 @@ namespace Patrik.GameProject
             time += delta;
 
             // remove after time T
-            if (time > 0.1f)
+            if (time > 1f)
             {
                 Dead = true;
             }

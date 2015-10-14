@@ -33,7 +33,7 @@ class Globals
         tileTable.Put('O', new TileData(ETileType.FLOOR, dot, Color.LightGray));
         tileTable.Put('W', new TileData(ETileType.WALL, dot, Color.Black));
         tileTable.Put('S', new TileData(ETileType.SPAWN, dot, Color.Red));
-        tileTable.Put('C', new TileData(ETileType.CREATE, create, Color.Brown));
+        tileTable.Put('C', new TileData(ETileType.CRATE, create, Color.Brown));
 
 
         // Init key bindings

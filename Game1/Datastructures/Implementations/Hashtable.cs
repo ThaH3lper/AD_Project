@@ -24,7 +24,7 @@ namespace Patrik.GameProject.Datastructures.Implementations
         /// <summary>
         /// Table is an array with fixed size and contains LinkedLists.
         /// </summary>
-        private IList<Entry<K, T>>[] table;
+        private IList<Entry>[] table;
 
         /// <summary>
         /// Returns the amount of entrys in insertionOrder.
@@ -33,9 +33,9 @@ namespace Patrik.GameProject.Datastructures.Implementations
 
         public void Clear()
         {
-            table = new LinkedList<Entry<K, T>>[table.Count()];
+            table = new LinkedList<Entry>[table.Count()];
             for (int i = 0; i < table.Count(); i++)
-                table[i] = new LinkedList<Entry<K, T>>();
+                table[i] = new LinkedList<Entry>();
 
             insertionOrder.Clear();
         }
@@ -47,9 +47,9 @@ namespace Patrik.GameProject.Datastructures.Implementations
         /// <param name="size">The size of the hashtabelarray.</param>
         public Hashtable(int size = 10)
         {
-            table = new LinkedList<Entry<K, T>>[size];
+            table = new LinkedList<Entry>[size];
             for (int i = 0; i < size; i++)
-                table[i] = new LinkedList<Entry<K, T>>();
+                table[i] = new LinkedList<Entry>();
         }
 
         /// <summary>
@@ -72,14 +72,34 @@ namespace Patrik.GameProject.Datastructures.Implementations
         public T Get(K key)
         {
             int hashIndex = HashIndex(key);
-            if(table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
+            if (table[hashIndex].Contains(new Entry(key, default(T))))
             {
-               // Entry<K, T> entry = table[hashIndex].Where(new Entry<K, T>(key, default(T))).Value;
                 var entry = table[hashIndex].SingleOrDefault(x => x.key.Equals(key));
                 return entry.value;
             }
             return default(T);
         }
+
+        public T this[K key]
+        {
+            get
+            {
+                return Get(key);
+            }
+            set
+            {
+                int hashIndex = HashIndex(key);
+                if (table[hashIndex].Contains(new Entry(key, default(T))))
+                {
+                    var entry = table[hashIndex].SingleOrDefault(x => x.key.Equals(key));
+                    if (entry != null)
+                    {
+                        entry.value = value;
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// Insert a new entry to the hashtable.
@@ -89,10 +109,10 @@ namespace Patrik.GameProject.Datastructures.Implementations
         public bool Put(K key, T value)
         {
             int hashIndex = HashIndex(key);
-            if (table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
+            if (table[hashIndex].Contains(new Entry(key, default(T))))
                 return false;
 
-            table[hashIndex].Add(new Entry<K, T>(key, value));
+            table[hashIndex].Add(new Entry(key, value));
             insertionOrder.Add(value);
             return true;
         }
@@ -105,7 +125,7 @@ namespace Patrik.GameProject.Datastructures.Implementations
         public bool Remove(K key)
         {
             int hashIndex = HashIndex(key);
-            if (table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
+            if (table[hashIndex].Contains(new Entry(key, default(T))))
             {
                 var entry = table[hashIndex].SingleOrDefault(x => x.key.Equals(key));
 
@@ -116,12 +136,23 @@ namespace Patrik.GameProject.Datastructures.Implementations
             return false;
         }
 
+        public bool Contains(K key)
+        {
+            int hashIndex = HashIndex(key);
+            if (table[hashIndex].Contains(new Entry(key, default(T))))
+            {
+                var entry = table[hashIndex].SingleOrDefault(x => x.key.Equals(key));
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Get the insertion order. The insertionorder can contain 
         /// values that are not longer existing in the hashtable.
         /// </summary>
         /// <returns>Returns a LinkedList of all values that have been inserted.</returns>
-        public IList<T> GetInsertionOrder(){ return insertionOrder; }
+        public IList<T> GetInsertionOrder() { return insertionOrder; }
 
         /// <summary>
         /// Prints out the hashtable and how its currently structured.
@@ -131,59 +162,59 @@ namespace Patrik.GameProject.Datastructures.Implementations
             for (int i = 0; i < table.Length; i++)
             {
                 string s = i + "";
-                foreach(Entry<K, T> entry in table[i])
+                foreach (Entry entry in table[i])
                     s += " -> " + entry.value;
                 Console.WriteLine(s);
             }
         }
-    }
-
-    /// <summary>
-    /// Entry is a object in the hashtable. Contains a key and a value. Key and Value can be any type.
-    /// </summary>
-    /// <typeparam name="K">Type on the key.</typeparam>
-    /// <typeparam name="T">Type on the value.</typeparam>
-    class Entry<K, T>
-    {
-        /// <summary>
-        /// Key to find this entry and get the value.
-        /// </summary>
-        public K key { get; private set; }
 
         /// <summary>
-        /// Value of this entry.
+        /// Entry is a object in the hashtable. Contains a key and a value. Key and Value can be any type.
         /// </summary>
-        public T value { get; private set; }
-
-        /// <summary>
-        /// Constructor to create Entry.
-        /// </summary>
-        /// <param name="key">The key of the entry</param>
-        /// <param name="value">The value of the entry</param>
-        public Entry(K key, T value)
+        /// <typeparam name="K">Type on the key.</typeparam>
+        /// <typeparam name="T">Type on the value.</typeparam>
+        private class Entry
         {
-            this.key = key;
-            this.value = value;
-        }
+            /// <summary>
+            /// Key to find this entry and get the value.
+            /// </summary>
+            public K key { get; private set; }
 
-        /// <summary>
-        /// Overrides the "Equals" operator. Makes us able to use LinkedList.Find() method.
-        /// </summary>
-        /// <param name="obj">The entry to compaire to.</param>
-        /// <returns>Return true if both keys are equal.</returns>
-        public override bool Equals(object obj)
-        {
-            Entry<K, T> entry = (Entry<K, T>)obj;
-            return key.Equals(entry.key);
-        }
+            /// <summary>
+            /// Value of this entry.
+            /// </summary>
+            public T value { get; set; }
 
-        /// <summary>
-        /// Visual studio complains about not implementing this method if you override "Equals".
-        /// </summary>
-        /// <returns>Returns hashcode</returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            /// <summary>
+            /// Constructor to create Entry.
+            /// </summary>
+            /// <param name="key">The key of the entry</param>
+            /// <param name="value">The value of the entry</param>
+            public Entry(K key, T value)
+            {
+                this.key = key;
+                this.value = value;
+            }
+
+            /// <summary>
+            /// Overrides the "Equals" operator. Makes us able to use LinkedList.Find() method.
+            /// </summary>
+            /// <param name="obj">The entry to compaire to.</param>
+            /// <returns>Return true if both keys are equal.</returns>
+            public override bool Equals(object obj)
+            {
+                Entry entry = (Entry)obj;
+                return key.Equals(entry.key);
+            }
+
+            /// <summary>
+            /// Visual studio complains about not implementing this method if you override "Equals".
+            /// </summary>
+            /// <returns>Returns hashcode</returns>
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
         }
     }
 }

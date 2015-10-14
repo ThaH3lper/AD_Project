@@ -11,7 +11,11 @@ namespace Game1.Datastructures.ADT
 
         T Get(K key);
 
+        T this[K key] { get; set; }
+
         bool Remove(K key);
+
+        bool Contains(K key);
 
         void Clear();
     }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Game1.Datastructures.ADT;
 
 namespace Game1.Datastructures.Implementations
 {
-    class LinkedList<T> : ADT.IList<T>
+    public class LinkedList<T> : ADT.IList<T>
     {
         /// <summary>
         /// Node class is a container for the stack data, and a pointer to the next node.
@@ -60,13 +59,13 @@ namespace Game1.Datastructures.Implementations
         private Node GetNodeAt(int i)
         {
             var node = Head;
-            int index = 0;
+            int index = Count - 1 ;
             while (node != null)
             {
                 if (index == i)
                     return node;
 
-                index++;
+                index--;
                 node = node.Next;
             }
 
