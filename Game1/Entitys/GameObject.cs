@@ -4,7 +4,7 @@ using System;
 
 namespace Patrik.GameProject
 {
-    class GameObject
+    public class GameObject
     {
         protected float speed, rotation, scale;
         protected Vector2 direction, position, originHit, originDraw;
@@ -51,6 +51,8 @@ namespace Patrik.GameProject
         {
             return Math.Max(recHit.Width, recHit.Height) / 2f;
         }
+
+        public Rectangle GetHitRectangle() { return recHit;  }
 
         public float GetRotation() { return rotation; }
     }

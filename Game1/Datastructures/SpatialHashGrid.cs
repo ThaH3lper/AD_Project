@@ -9,6 +9,9 @@ using Game1.Entitys;
 
 namespace Game1.Datastructures
 {
+    /// <summary>
+    /// TODO Explain
+    /// </summary>
     class SpatialHashGrid
     {
         private Hashtable<int, IList<GameObject>> Buckets;
@@ -23,7 +26,7 @@ namespace Game1.Datastructures
         {
             Cols = scenewidth / cellsize;
             Rows = sceneheight / cellsize;
-            Buckets = new Hashtable<int, IList<GameObject>> (Cols * Rows);
+            Buckets = new Hashtable<int, IList<GameObject>>(Cols * Rows);
 
             for (int i = 0; i < Cols * Rows; i++)
             {
@@ -69,11 +72,13 @@ namespace Game1.Datastructures
             Vector2 min = new Vector2(
                 obj.GetPosition().X - (obj.GetMaxRadius()),
                 obj.GetPosition().Y - (obj.GetMaxRadius()));
+
             Vector2 max = new Vector2(
                 obj.GetPosition().X + (obj.GetMaxRadius()),
                 obj.GetPosition().Y + (obj.GetMaxRadius()));
 
-            float width = SceneWidth / CellSize;
+            float width = Cols; //SceneWidth / CellSize;
+
             //TopLeft
             AddBucket(min, width, bucketsObjIsIn);
             //TopRight
@@ -88,17 +93,14 @@ namespace Game1.Datastructures
 
         private void AddBucket(Vector2 vector, float width, IList<int> buckettoaddto)
         {
-            int cellPosition = (int)(
-                       (Math.Floor(vector.X / CellSize)) +
-                       (Math.Floor(vector.Y / CellSize)) *
-                       width
-            );
+            int cellPosition = (int)((Math.Floor(vector.X / CellSize)) + (Math.Floor(vector.Y / CellSize)) * width);
+
             if (!buckettoaddto.Contains(cellPosition))
                 buckettoaddto.Add(cellPosition);
 
         }
 
-        public IList<GameObject> GetNearby(GameObject obj)
+        public IList<GameObject> GetPossibleColliders(GameObject obj)
         {
             var objects = new LinkedList<GameObject>();
             var bucketIds = GetIdForObj(obj);

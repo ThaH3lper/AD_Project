@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Game1.Datastructures.ADT;
 using Game1.Entitys;
 using Game1.Datastructures.Implementations;
 using Game1.Datastructures;
+using System.Linq;
 using System;
 
 namespace Patrik.GameProject
@@ -27,6 +27,17 @@ namespace Patrik.GameProject
             this.enemies = new LinkedList<BaseEnemy>();
             this.collisionCuller = new SpatialHashGrid();
             this.collisionCuller.Setup(map.GetWidth() * Tile.SIZE, map.GetHeight() * Tile.SIZE, (map.GetWidth() * Tile.SIZE) / 6);
+
+            InitEnemies();
+        }
+
+        private void InitEnemies()
+        {
+            BaseEnemy test = new BaseEnemy(Globals.player, new Vector2(300, 300), 240, 40, map);
+            enemies.Add(test);
+
+            test = new BaseEnemy(Globals.player, new Vector2(300, 600), 240, 40, map);
+            enemies.Add(test);
         }
 
         public override void Update(float delta)
@@ -36,9 +47,40 @@ namespace Patrik.GameProject
             UpdateCamera();
             UpdateBullets(delta);
 
+            //var nearby = collisionCuller.GetPossibleColliders(player);
+            var canSee = RayCast(enemies[1].GetPosition(), player.GetPosition());
+            Console.WriteLine(canSee);
+
             base.Update(delta);
         }
 
+        public bool RayCast(Vector2 origin, Vector2 target)
+        {
+            var segment = new Segment(origin, target);
+
+            for (int y = 0; y < map.getTileMap().GetLength(0); y++)
+            {
+                for (int x = 0; x < map.getTileMap().GetLength(1); x++)
+                {
+                    if (map.getTileMap()[x, y].GetType() != ETileType.WALL && map.getTileMap()[x, y].GetType() != ETileType.CREATE)
+                        continue;
+
+                    if (segment.Collide(map.getTileMap()[x, y].GetRecHit()))
+                        return false;
+                }
+            }
+
+            foreach (var enemy in enemies)
+            {
+              //  if (segment.Collide(enemy.GetHitRectangle()))
+               //     return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Clear collision map and re-add all to ensure that everyone is in the right bucket.
+        /// </summary>
         private void UpdateCollisionCuller()
         {
             collisionCuller.ClearBuckets();
