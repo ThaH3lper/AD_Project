@@ -20,7 +20,7 @@ namespace Game1.Entitys
 
             if (world.RayCast(GetPosition(), world.Player.GetPosition()))
             {
-                world.SpawnBullet(this);
+                Fire();
             }
         }
     }

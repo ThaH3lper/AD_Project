@@ -22,7 +22,9 @@ namespace Patrik.GameProject
         {
             this.world = world;
             this.owner = owner;
-            cooldown = 0.5f;
+
+            //Test
+            cooldown = 0.08f;
         }
 
         public virtual void Fire()

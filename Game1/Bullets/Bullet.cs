@@ -20,9 +20,9 @@ namespace Patrik.GameProject
         public Bullet(Entity shooter)
         {
             rotation = shooter.GetRotation();
-            scale = shooter.GetScale();
-            position = shooter.GetPosition();
+            scale = shooter.GetScale();       
             direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
+            position = shooter.GetPosition() + (direction * shooter.GetMaxRadius());
 
             origin = new Vector2(recDraw.Width / 2, recDraw.Height / 2);
             texture = Globals.bullet;
@@ -33,7 +33,7 @@ namespace Patrik.GameProject
             time += delta;
 
             // remove after time T
-            if (time > 0.1f)
+            if (time > 0.3f)
             {
                 Dead = true;
             }
@@ -43,7 +43,7 @@ namespace Patrik.GameProject
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(texture, position, recDraw, Color.Yellow, rotation, origin, scale, SpriteEffects.None, 1f);
+            batch.Draw(texture, position, recDraw, Color.Black, rotation, origin, scale, SpriteEffects.None, 1f);
         }
 
         public float GetTime() { return time;  }

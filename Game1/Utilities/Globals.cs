@@ -13,7 +13,7 @@ class Globals
     public static int GAME_WIDTH = 1280, GAME_HEIGHT = 720;
     public static string TITLE = "Applied Data Structures and Algorithms Project";
 
-    public static Texture2D player, gun, dot, create, bullet;
+    public static Texture2D player, gun, dot, create, bullet, aim;
     public static Map map;
 
     public static IMap<char, TileData> tileTable = new Hashtable<char, TileData>(4);
@@ -28,6 +28,7 @@ class Globals
         dot = game.Content.Load<Texture2D>("dot");
         create = game.Content.Load<Texture2D>("create");
         bullet = game.Content.Load<Texture2D>("bullet");
+        aim = game.Content.Load<Texture2D>("aim");
 
         // Init tiles 
         tileTable.Put('O', new TileData(ETileType.FLOOR, dot, Color.LightGray));

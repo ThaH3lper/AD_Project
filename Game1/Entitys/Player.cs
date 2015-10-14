@@ -13,12 +13,12 @@ namespace Patrik.GameProject
         }
 
         private Inputs input;
-        protected Vector2 posAim;
+        public Vector2 PosAim { private set; get; }
 
         public Player(Vector2 position, SimulationWorld world, Inputs input) : base(Globals.player, position, 250, 40, world)
         {
             this.input = input;
-            posAim = position;
+            PosAim = position;
         }
 
         public override void Update(float delta)
@@ -37,9 +37,9 @@ namespace Patrik.GameProject
 
             Move(dir);
 
-            posAim = input.GetPosCamera();
+            PosAim = input.GetPosCamera();
 
-            rotation = (float)Math.Atan2(posAim.Y - position.Y, posAim.X - position.X);
+            rotation = (float)Math.Atan2(PosAim.Y - position.Y, PosAim.X - position.X);
 
             base.Update(delta);
         }
