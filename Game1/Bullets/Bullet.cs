@@ -7,28 +7,20 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    public class Bullet
+    public class Bullet : GameObject
     {
-        private static Rectangle recDraw = new Rectangle(0, 0, 10, 5);
-        private static float SPEED = 1600;
-        float rotation, scale, time;
-        Texture2D texture;
-        Vector2 position, origin, direction;
+        float time;
 
         public bool Dead { get; private set; }
 
-        public Bullet(Entity shooter)
+        public Bullet(Entity shooter) : base(Globals.bullet, shooter.GetPosition(), 1600, 7, new Rectangle(0, 0, 10, 5))
         {
             rotation = shooter.GetRotation();
-            scale = shooter.GetScale();       
             direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
             position = shooter.GetPosition() + (direction * shooter.GetMaxRadius());
-
-            origin = new Vector2(recDraw.Width / 2, recDraw.Height / 2);
-            texture = Globals.bullet;
         }
 
-        public void Update(float delta)
+        public override void Update(float delta)
         {
             time += delta;
 
@@ -38,12 +30,8 @@ namespace Patrik.GameProject
                 Dead = true;
             }
 
-            position += direction * SPEED * delta;
-        }
-
-        public void Draw(SpriteBatch batch)
-        {
-            batch.Draw(texture, position, recDraw, Color.Black, rotation, origin, scale, SpriteEffects.None, 1f);
+            position += direction * speed * delta;
+            base.Update(delta);
         }
 
         public float GetTime() { return time;  }
