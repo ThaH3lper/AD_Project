@@ -12,17 +12,19 @@ namespace Patrik.GameProject
     public class Entity : GameObject
     {
         protected SimulationWorld world;
-       
+        protected Weapon weapon;
 
         public Entity(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, new Rectangle(0, 0, 64, 64))
         {
             this.world = world;
+            this.weapon = new Weapon(world, this);
         }
 
         public override void Update(float delta)
         {
             VerticalMove(delta);
             HorizontalMove(delta);
+            weapon.Update(delta);
 
             //recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
             base.Update(delta);
@@ -31,6 +33,11 @@ namespace Patrik.GameProject
         public void Move(Vector2 direction)
         {
             this.direction = direction;
+        }
+
+        public void Fire()
+        {
+            weapon.Fire();
         }
 
         public override void Draw(SpriteBatch batch)
