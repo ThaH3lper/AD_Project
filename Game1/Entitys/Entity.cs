@@ -11,12 +11,12 @@ namespace Patrik.GameProject
     class Entity : GameObject
     {
         protected Map map;
-        protected Vector2 posAim;
+       
 
-        public Entity(Vector2 position, float speed, int size, Map map) : base(Globals.player, position, speed, size, new Rectangle(0, 0, 64, 64))
+        public Entity(Texture2D texture, Vector2 position, float speed, int size, Map map) : base(texture, position, speed, size, new Rectangle(0, 0, 64, 64))
         {
             this.map = map;
-            posAim = position;
+           
         }
 
         public override void Update(float delta)
@@ -24,9 +24,8 @@ namespace Patrik.GameProject
             VerticalMove(delta);
             HorizontalMove(delta);
 
-            rotation = (float) Math.Atan2(posAim.Y - position.Y, posAim.X - position.X);
-
-            recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
+            //recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
+            base.Update(delta);
         }
 
         public void Move(Vector2 direction)

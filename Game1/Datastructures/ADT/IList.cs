@@ -8,11 +8,14 @@ namespace Game1.Datastructures.ADT
 
         void Add(T item);
 
+        void AddRange(IEnumerable<T> items);
+
         T this[int key] { get; set; }
 
         bool Contains(T item);
 
         void Remove(T item);
 
+        void Clear();
     }
 }

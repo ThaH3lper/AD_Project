@@ -42,5 +42,9 @@ namespace Patrik.GameProject
 
         public Tile[,] getTileMap() { return tileMap; }
 
+        public int GetWidth() { return tileMap.GetLength(0); }
+
+        public int GetHeight() { return tileMap.GetLength(1); }
+
     }
 }

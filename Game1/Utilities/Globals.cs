@@ -22,18 +22,21 @@ class Globals
 
     public static void LoadContent(MainGame game)
     {
+        // Load assets
         player = game.Content.Load<Texture2D>("player");
         gun = game.Content.Load<Texture2D>("gun");
         dot = game.Content.Load<Texture2D>("dot");
         create = game.Content.Load<Texture2D>("create");
         bullet = game.Content.Load<Texture2D>("bullet");
 
+        // Init tiles 
         tileTable.Put('O', new TileData(ETileType.FLOOR, dot, Color.LightGray));
         tileTable.Put('W', new TileData(ETileType.WALL, dot, Color.Black));
         tileTable.Put('S', new TileData(ETileType.SPAWN, dot, Color.Red));
         tileTable.Put('C', new TileData(ETileType.CREATE, create, Color.Brown));
 
 
+        // Init key bindings
         inputTable.Put(Player.Commands.MoveUp, new LinkedList<Keys>() { Keys.Up, Keys.W });
         inputTable.Put(Player.Commands.MoveDown, new LinkedList<Keys>() { Keys.Down, Keys.S });
         inputTable.Put(Player.Commands.MoveLeft, new LinkedList<Keys>() { Keys.Left, Keys.A });

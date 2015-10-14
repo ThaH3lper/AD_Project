@@ -30,7 +30,16 @@ namespace Patrik.GameProject.Datastructures.Implementations
         /// Returns the amount of entrys in insertionOrder.
         /// </summary>
         public int count { get { return insertionOrder.Count; } }
-      
+
+        public void Clear()
+        {
+            table = new LinkedList<Entry<K, T>>[table.Count()];
+            for (int i = 0; i < table.Count(); i++)
+                table[i] = new LinkedList<Entry<K, T>>();
+
+            insertionOrder.Clear();
+        }
+
 
         /// <summary>
         /// Constructor. Initializes all the lists for the array.
@@ -82,6 +91,7 @@ namespace Patrik.GameProject.Datastructures.Implementations
             int hashIndex = HashIndex(key);
             if (table[hashIndex].Contains(new Entry<K, T>(key, default(T))))
                 return false;
+
             table[hashIndex].Add(new Entry<K, T>(key, value));
             insertionOrder.Add(value);
             return true;

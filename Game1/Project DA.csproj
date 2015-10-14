@@ -43,6 +43,8 @@
     <Compile Include="Datastructures\ADT\IList.cs" />
     <Compile Include="Datastructures\ADT\IMap.cs" />
     <Compile Include="Datastructures\Implementations\LinkedList.cs" />
+    <Compile Include="Datastructures\SpatialHashGrid.cs" />
+    <Compile Include="Entitys\BaseEnemy.cs" />
     <Compile Include="Entitys\Player.cs" />
     <Compile Include="Map\ETileType.cs" />
     <Compile Include="Scene\EScene.cs" />

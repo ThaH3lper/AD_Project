@@ -9,7 +9,7 @@ Bullets:
 
 Weapon/Ammo:
 - Olika skott skall kunna plockas up. Shotgun, Pistol, Rifle...
-- Man ska inte kunna bytta vapen, utan man använder det man senast plockade up.
+- Man ska inte kunna byta vapen, utan man använder det man senast plockade up.
 - Skott spawnsa random på kartan
 
 AI:
@@ -20,5 +20,5 @@ AI:
 
 Datastrukturer:
  #Check# - Ersätta alla Listor med egna listor
-- Fler ställen att använda hashtable?
+ #Check# (Keybindings) - Fler ställen att använda hashtable?
 - Graf -> A* för AI:n

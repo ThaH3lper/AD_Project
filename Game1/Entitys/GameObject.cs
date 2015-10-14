@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Patrik.GameProject
 {
@@ -27,7 +28,7 @@ namespace Patrik.GameProject
 
         public virtual void Update(float delta)
         {
-            position += direction * speed * delta;
+            //position += direction * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
         }
 
@@ -45,6 +46,11 @@ namespace Patrik.GameProject
         public Vector2 GetOrigin() { return originHit; }
 
         public float GetScale() { return scale; }
+
+        public float GetMaxRadius()
+        {
+            return Math.Max(recHit.Width, recHit.Height) / 2f;
+        }
 
         public float GetRotation() { return rotation; }
     }

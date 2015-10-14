@@ -12,5 +12,7 @@ namespace Game1.Datastructures.ADT
         T Get(K key);
 
         bool Remove(K key);
+
+        void Clear();
     }
 }

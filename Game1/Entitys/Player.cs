@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Patrik.GameProject
 {
@@ -16,10 +12,12 @@ namespace Patrik.GameProject
         }
 
         private Inputs input;
+        protected Vector2 posAim;
 
-        public Player(Vector2 position, Map map, Inputs input) : base(position, 250, 40, map)
+        public Player(Vector2 position, Map map, Inputs input) : base(Globals.player, position, 250, 40, map)
         {
             this.input = input;
+            posAim = position;
         }
 
         public override void Update(float delta)
@@ -38,6 +36,8 @@ namespace Patrik.GameProject
             Move(dir);
 
             posAim = input.GetPosCamera();
+
+            rotation = (float)Math.Atan2(posAim.Y - position.Y, posAim.X - position.X);
 
             base.Update(delta);
         }

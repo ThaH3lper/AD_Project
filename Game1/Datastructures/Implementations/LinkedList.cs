@@ -49,6 +49,14 @@ namespace Game1.Datastructures.Implementations
             ++Count;
         }
 
+        public void AddRange(System.Collections.Generic.IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                Add(item);
+            }
+        }
+
         private Node GetNodeAt(int i)
         {
             var node = Head;
@@ -94,6 +102,12 @@ namespace Game1.Datastructures.Implementations
             Count--;
         }
 
+        public void Clear()
+        {
+            Count = 0;
+            Head = null;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             var node = Head;
@@ -108,7 +122,7 @@ namespace Game1.Datastructures.Implementations
         {
             return GetEnumerator();
         }
-      
+
     }
 
 }
