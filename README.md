@@ -14,11 +14,11 @@ Weapon/Ammo:
 
 AI:
 - Ai gubbar spawnas random på kartan på "spawn tiles"
-- Ai går mot spelaren enligt A*
+#Check# - Ai går mot spelaren enligt A*
 #Ischh# - Om Ai ser spelaren skjuter den samtidigt som den går, Om den inte ser siktar den bara i färdrikningen
 - När AI:n nåt spelaren inom X radius stannar den och skjuter på spelaren
 
 Datastrukturer:
  #Check# - Ersätta alla Listor med egna listor
  #Check# (Keybindings) - Fler ställen att använda hashtable?
-- Graf -> A* för AI:n
+#Check# - Graf -> A* för AI:n

@@ -43,6 +43,8 @@ namespace Game1.Datastructures.Implementations
 
         public void Add(T item)
         {
+            if (item == null) return;
+
             var newNode = new Node(item, Head);
             Head = newNode;
             ++Count;
@@ -50,6 +52,8 @@ namespace Game1.Datastructures.Implementations
 
         public void AddRange(System.Collections.Generic.IEnumerable<T> items)
         {
+            if (items == null) return;
+
             foreach (var item in items)
             {
                 Add(item);

@@ -25,6 +25,7 @@ namespace Game1.Scene
 
         private SpatialHashGrid collisionCuller;
         private Inputs input;
+        private float time;
 
         public SimulationWorld(Inputs input)
         {
@@ -42,15 +43,55 @@ namespace Game1.Scene
 
         private void InitEnemies()
         {
-            BaseEnemy test = new BaseEnemy(Globals.player, new Vector2(300, 300), 100, 40, this);
-            Enemies.Add(test);
+            SpawnEnemy();
 
-            test = new BaseEnemy(Globals.player, new Vector2(300, 600), 100, 40, this);
-            Enemies.Add(test);
+        }
+
+        private void SpawnEnemy()
+        {
+            var spawns = new LinkedList<Tile>();
+            foreach (var item in Map.getTileMap())
+            {
+                if (item.GetTileType() == ETileType.SPAWN)
+                {
+                    spawns.Add(item);
+                }
+            }
+
+            var rand = new Random();
+
+            Tile tile = spawns[rand.Next(0, spawns.Count)];
+
+            BaseEnemy e = new BaseEnemy(Globals.player, new Vector2(tile.GetRecHit().X - Tile.SIZE/2f, tile.GetRecHit().Y + Tile.SIZE / 2f), 100, 40, this);
+            Enemies.Add(e);
+        }
+
+        public System.Collections.Generic.ICollection<Rectangle> GetColliders(Entity obj)
+        {
+            IList<Rectangle> colliders = new LinkedList<Rectangle>();
+
+            //
+            colliders.AddRange(collisionCuller.GetPossibleColliders(obj).Where(x => x != obj).Select(x => x.GetHitRectangle()));
+
+            // Tile colliders
+            for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
+            {
+                for (int x = 0; x < Map.getTileMap().GetLength(1); x++)
+                {
+                    if (Map.getTileMap()[x, y].GetTileType() != ETileType.WALL && Map.getTileMap()[x, y].GetTileType() != ETileType.CRATE)
+                        continue;
+
+                    colliders.Add(Map.getTileMap()[x, y].GetRecHit());
+                }
+            }
+
+            return colliders.Where(x=> x.Intersects(obj.GetHitRectangle())).ToList();
         }
 
         public void Update(float delta)
         {
+            this.time += delta;
+
             UpdateCollisionCuller();
             UpdatePlayer(delta);
             UpdateEnemies(delta);
@@ -102,6 +143,12 @@ namespace Game1.Scene
             foreach (var enemy in Enemies)
             {
                 enemy.Update(delta);
+            }
+
+            if (Enemies.Count < 7 && time > 5)
+            {
+                time = 0;
+               SpawnEnemy();
             }
         }
 

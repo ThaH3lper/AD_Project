@@ -26,7 +26,6 @@ namespace Patrik.GameProject
             HorizontalMove(delta);
             weapon.Update(delta);
 
-            //recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
             base.Update(delta);
         }
 
@@ -50,10 +49,17 @@ namespace Patrik.GameProject
             position.Y += direction.Y * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
 
-            Tile colliding = world.Map.GetCollidingTile(recHit);
-            if (colliding == null)
+            //Tile colliding = world.Map.GetCollidingTile(recHit);
+            //if (colliding == null)
+            //    return;
+
+            //Rectangle rec = colliding.GetRecHit();
+
+            Rectangle rec = world.GetColliders(this).FirstOrDefault();
+
+            if (rec == Rectangle.Empty)
                 return;
-            Rectangle rec = colliding.GetRecHit();
+
             if (direction.Y > 0)
                 position.Y = rec.Y - originHit.Y;
             else if (direction.Y < 0)
@@ -65,10 +71,17 @@ namespace Patrik.GameProject
             position.X += direction.X * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
 
-            Tile colliding = world.Map.GetCollidingTile(recHit);
-            if (colliding == null)
+            //Tile colliding = world.Map.GetCollidingTile(recHit);
+            //if (colliding == null)
+            //    return;
+
+            //Rectangle rec = colliding.GetRecHit();
+
+            Rectangle rec = world.GetColliders(this).FirstOrDefault();
+
+            if (rec == Rectangle.Empty)
                 return;
-            Rectangle rec = colliding.GetRecHit();
+
             if (direction.X > 0)
                 position.X = rec.X - originHit.X;
             else if (direction.X < 0)
