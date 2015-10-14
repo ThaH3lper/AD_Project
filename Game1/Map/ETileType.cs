@@ -1,6 +1,6 @@
 ﻿namespace Patrik.GameProject
 {
-    enum ETile
+    enum ETileType
     {
         FLOOR, WALL, BOX, CREATE, SPAWN
     }
