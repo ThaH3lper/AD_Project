@@ -114,8 +114,8 @@ namespace Game1.Scene
         {
             BulletManager.Update(delta);
 
-            if (input.LeftClick())
-                BulletManager.addBullet(Player);
+            if (input.LeftPressed())
+                Player.Fire();
         }
 
     }
