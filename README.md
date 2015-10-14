@@ -19,6 +19,6 @@ AI:
 - När AI:n nåt spelaren inom X radius stannar den och skjuter på spelaren
 
 Datastrukturer:
-- Ersätta alla Listor med egna listor
+ #Check# - Ersätta alla Listor med egna listor
 - Fler ställen att använda hashtable?
 - Graf -> A* för AI:n

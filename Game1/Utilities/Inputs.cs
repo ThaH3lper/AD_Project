@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Game1.Datastructures.Implementations;
 using Game1.Datastructures.ADT;
+using System.Linq;
 
 namespace Patrik.GameProject
 {
@@ -21,10 +22,17 @@ namespace Patrik.GameProject
         {
             return keyState.IsKeyDown(key) && oldKeyState.IsKeyUp(key);
         }
+
         public bool KeyPressed(Keys key)
         {
             return keyState.IsKeyDown(key);
         }
+
+        public bool KeyPressed(System.Collections.Generic.IEnumerable<Keys> keys)
+        {
+            return keys.Any(x => keyState.IsKeyDown(x));
+        }
+
         public IList<Keys> GetKeyPressed()
         {
             IList<Keys> keys = new LinkedList<Keys>();

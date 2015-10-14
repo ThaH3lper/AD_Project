@@ -36,7 +36,7 @@ namespace Patrik.GameProject.Datastructures.Implementations
         /// Constructor. Initializes all the lists for the array.
         /// </summary>
         /// <param name="size">The size of the hashtabelarray.</param>
-        public Hashtable(int size)
+        public Hashtable(int size = 10)
         {
             table = new LinkedList<Entry<K, T>>[size];
             for (int i = 0; i < size; i++)

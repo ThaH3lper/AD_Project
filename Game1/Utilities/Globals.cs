@@ -6,6 +6,7 @@ using System;
 using Game1.Datastructures.ADT;
 using Patrik.GameProject.Datastructures.Implementations;
 using Game1.Datastructures.Implementations;
+using Microsoft.Xna.Framework.Input;
 
 class Globals
 {
@@ -16,6 +17,8 @@ class Globals
     public static Map map;
 
     public static IMap<char, TileData> tileTable = new Hashtable<char, TileData>(4);
+
+    public static IMap<Player.Commands, IList<Keys>> inputTable = new Hashtable<Player.Commands, IList<Keys>>();
 
     public static void LoadContent(MainGame game)
     {
@@ -29,6 +32,13 @@ class Globals
         tileTable.Put('W', new TileData(ETileType.WALL, dot, Color.Black));
         tileTable.Put('S', new TileData(ETileType.SPAWN, dot, Color.Red));
         tileTable.Put('C', new TileData(ETileType.CREATE, create, Color.Brown));
+
+
+        inputTable.Put(Player.Commands.MoveUp, new LinkedList<Keys>() { Keys.Up, Keys.W });
+        inputTable.Put(Player.Commands.MoveDown, new LinkedList<Keys>() { Keys.Down, Keys.S });
+        inputTable.Put(Player.Commands.MoveLeft, new LinkedList<Keys>() { Keys.Left, Keys.A });
+        inputTable.Put(Player.Commands.MoveRight, new LinkedList<Keys>() { Keys.Right, Keys.D });
+
 
         loadMap(game);
     }
