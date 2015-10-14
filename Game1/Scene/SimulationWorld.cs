@@ -42,10 +42,10 @@ namespace Game1.Scene
 
         private void InitEnemies()
         {
-            BaseEnemy test = new BaseEnemy(Globals.player, new Vector2(300, 300), 240, 40, this);
+            BaseEnemy test = new BaseEnemy(Globals.player, new Vector2(300, 300), 100, 40, this);
             Enemies.Add(test);
 
-            test = new BaseEnemy(Globals.player, new Vector2(300, 600), 240, 40, this);
+            test = new BaseEnemy(Globals.player, new Vector2(300, 600), 100, 40, this);
             Enemies.Add(test);
         }
 

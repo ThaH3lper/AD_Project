@@ -19,7 +19,10 @@ namespace Game1.Entitys
             base.Update(delta);
 
             if (target != Vector2.Zero && (target - position).Length() > 2)
-                position = Vector2.Lerp(position, target, delta * speed / 100);
+            {
+                float range = (target - position).Length();
+                position = Vector2.Lerp(position, target, delta * speed / range);
+            }
             else
                 RebuildPath();
 
