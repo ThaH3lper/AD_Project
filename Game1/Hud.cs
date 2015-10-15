@@ -26,6 +26,7 @@ namespace Patrik.GameProject
         public void Update(float delta)
         {
             aim.Update(delta);
+            aim.setAimCooldown(world.Player.GetWeapon().GetCooldownFloat());
         }
         public Vector2 WorldToHudPosition(Vector2 position)
         {

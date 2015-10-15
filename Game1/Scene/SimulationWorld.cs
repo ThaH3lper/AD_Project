@@ -32,7 +32,7 @@ namespace Game1.Scene
             this.input = input;
             this.Map = Globals.map;
             this.Player = new Player(new Vector2(100, 100), this, input);
-            this.BulletManager = new BulletManager();
+            this.BulletManager = new BulletManager(this);
             this.Enemies = new LinkedList<BaseEnemy>();
             this.PathFinder = new PathFinder(this);
             this.collisionCuller = new SpatialHashGrid();

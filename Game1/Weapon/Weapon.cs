@@ -24,7 +24,7 @@ namespace Patrik.GameProject
             this.owner = owner;
 
             //Test
-            cooldown = 0.08f;
+            cooldown = 0.5f;
         }
 
         public virtual void Fire()

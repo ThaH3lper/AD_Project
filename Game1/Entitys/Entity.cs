@@ -13,9 +13,11 @@ namespace Patrik.GameProject
     {
         protected SimulationWorld world;
         protected Weapon weapon;
+        protected float speed;
 
-        public Entity(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, new Rectangle(0, 0, 64, 64))
+        public Entity(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, size, new Rectangle(0, 0, 64, 64))
         {
+            this.speed = speed;
             this.world = world;
             this.weapon = new Weapon(world, this);
         }
@@ -37,6 +39,10 @@ namespace Patrik.GameProject
         public void Fire()
         {
             weapon.Fire();
+        }
+        public Weapon GetWeapon()
+        {
+            return weapon;
         }
 
         public override void Draw(SpriteBatch batch)
