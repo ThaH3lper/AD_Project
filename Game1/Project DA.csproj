@@ -38,7 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Aim.cs" />
+    <Compile Include="Hud\Aim.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletManager.cs" />
     <Compile Include="Datastructures\ADT\IList.cs" />
@@ -49,7 +49,7 @@
     <Compile Include="Entitys\BaseEnemy.cs" />
     <Compile Include="Entitys\Collision\Segment.cs" />
     <Compile Include="Entitys\Player.cs" />
-    <Compile Include="Hud.cs" />
+    <Compile Include="Hud\Hud.cs" />
     <Compile Include="Map\ETileType.cs" />
     <Compile Include="Scene\EScene.cs" />
     <Compile Include="Scene\GameScene.cs" />
