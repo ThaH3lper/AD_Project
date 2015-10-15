@@ -27,6 +27,13 @@ namespace Game1.Datastructures.Implementations
 
         public int Count { get; set; }
 
+        public bool IsReadOnly
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public T this[int i]
         {
@@ -88,8 +95,7 @@ namespace Game1.Datastructures.Implementations
             return false;
         }
 
-
-        public void Remove(T item)
+        bool ICollection<T>.Remove(T item)
         {
             Node foundNode = null;
             Node prevNode = Head.Next;
@@ -107,7 +113,7 @@ namespace Game1.Datastructures.Implementations
 
 
             if (foundNode == null)
-                return;
+                return false;
 
             if (foundNode == Head)
             {
@@ -116,8 +122,9 @@ namespace Game1.Datastructures.Implementations
             {
                 prevNode.Next = foundNode.Next;
             }
-
+            
             Count--;
+            return true;
         }
 
         public void Clear()
@@ -141,6 +148,12 @@ namespace Game1.Datastructures.Implementations
             return GetEnumerator();
         }
 
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+       
     }
 
 }

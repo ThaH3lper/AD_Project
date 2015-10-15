@@ -44,5 +44,7 @@ namespace Patrik.GameProject
             foreach (Bullet b in bullets)
                 b.Draw(batch);
         }
+
+        public IList<Bullet> GetBullets() { return bullets; }
     }
 }

@@ -11,6 +11,10 @@ namespace Game1.Datastructures
 {
     /// <summary>
     /// TODO Explain
+    /// Insert O(1) (hashtable)
+    /// Remove Average O(1)
+    /// Clear O(1)
+    /// 
     /// </summary>
     class SpatialHashGrid
     {
@@ -57,7 +61,7 @@ namespace Game1.Datastructures
             }
         }
 
-        public void AddObject(System.Collections.Generic.IEnumerable<BaseEnemy> objs)
+        public void AddObject(System.Collections.Generic.IEnumerable<GameObject> objs)
         {
             foreach (var item in objs)
             {
@@ -77,14 +81,17 @@ namespace Game1.Datastructures
                 obj.GetPosition().X + (obj.GetMaxRadius()),
                 obj.GetPosition().Y + (obj.GetMaxRadius()));
 
-            float width = Cols; //SceneWidth / CellSize;
+            float width = Cols;
 
             //TopLeft
             AddBucket(min, width, bucketsObjIsIn);
+
             //TopRight
             AddBucket(new Vector2(max.X, min.Y), width, bucketsObjIsIn);
+
             //BottomRight
             AddBucket(new Vector2(max.X, max.Y), width, bucketsObjIsIn);
+
             //BottomLeft
             AddBucket(new Vector2(min.X, max.Y), width, bucketsObjIsIn);
 

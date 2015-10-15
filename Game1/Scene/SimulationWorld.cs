@@ -70,8 +70,10 @@ namespace Game1.Scene
         {
             IList<Rectangle> colliders = new LinkedList<Rectangle>();
 
-            //
-            colliders.AddRange(collisionCuller.GetPossibleColliders(obj).Where(x => x != obj).Select(x => x.GetHitRectangle()));
+            // Get all possible colliders exept myself and bullets
+            colliders.AddRange(collisionCuller.GetPossibleColliders(obj)
+                .Where(x => x != obj && x.GetType() != typeof(Bullet))
+                .Select(x => x.GetHitRectangle()));
 
             // Tile colliders
             for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
@@ -136,6 +138,7 @@ namespace Game1.Scene
             collisionCuller.ClearBuckets();
             collisionCuller.AddObject(Player);
             collisionCuller.AddObject(Enemies);
+           // TODO uncomment me collisionCuller.AddObject(BulletManager.GetBullets());
         }
 
         private void UpdateEnemies(float delta)
