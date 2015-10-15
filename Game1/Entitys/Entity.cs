@@ -57,7 +57,7 @@ namespace Patrik.GameProject
 
             if (other is Bullet)
             {
-                ((Bullet)other).Kill(this);
+               return !((Bullet)other).CheckKill(this);
             }
 
             return true;
@@ -74,7 +74,7 @@ namespace Patrik.GameProject
 
             //Rectangle rec = colliding.GetRecHit();
 
-            var collide = world.GetColliders(this).FirstOrDefault();
+            var collide = world.GetColliders(this).Where(x => !(x is Bullet)).FirstOrDefault();
 
             if (collide == null)
                 return;
@@ -98,7 +98,7 @@ namespace Patrik.GameProject
 
             //Rectangle rec = colliding.GetRecHit();
 
-            var collide = world.GetColliders(this).FirstOrDefault();
+            var collide = world.GetColliders(this).Where(x => !(x is Bullet)).FirstOrDefault();
 
             if (collide == null)
                 return;

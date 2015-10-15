@@ -31,7 +31,8 @@ namespace Patrik.GameProject
                 if (t.GetTileType() == ETileType.CRATE)
                     return false;
             }
-            return true;
+
+            return owner != other;
         }
 
         public override void Update(float delta)
@@ -51,7 +52,7 @@ namespace Patrik.GameProject
 
         public float GetTime() { return time;  }
 
-        public void Kill(GameObject obj)
+        public bool CheckKill(GameObject obj)
         {
             if (obj != owner)
             {
@@ -62,13 +63,15 @@ namespace Patrik.GameProject
                     {
                         color = Color.Blue;
                         speed *= 0.8f;
-                        return;
+                        return true;
                     }
                 }
 
                 Dead = true;
+                return true;
 
             }
+            return false;
         }
     }
 }

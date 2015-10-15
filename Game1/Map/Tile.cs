@@ -26,7 +26,7 @@ namespace Patrik.GameProject
             if (type == ETileType.WALL || type == ETileType.CRATE)
             {
                 if (other is Bullet)
-                    ((Bullet)other).Kill(this);
+                    ((Bullet)other).CheckKill(this);
 
                 return true;
             }
