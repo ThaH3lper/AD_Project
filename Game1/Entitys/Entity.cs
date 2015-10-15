@@ -55,10 +55,12 @@ namespace Patrik.GameProject
 
             //Rectangle rec = colliding.GetRecHit();
 
-            Rectangle rec = world.GetColliders(this).FirstOrDefault();
+            var collide = world.GetColliders(this).FirstOrDefault();
 
-            if (rec == Rectangle.Empty)
+            if (collide == null)
                 return;
+
+            var rec = collide.GetHitRectangle();
 
             if (direction.Y > 0)
                 position.Y = rec.Y - originHit.Y;
@@ -77,10 +79,12 @@ namespace Patrik.GameProject
 
             //Rectangle rec = colliding.GetRecHit();
 
-            Rectangle rec = world.GetColliders(this).FirstOrDefault();
+            var collide = world.GetColliders(this).FirstOrDefault();
 
-            if (rec == Rectangle.Empty)
+            if (collide == null)
                 return;
+
+            var rec = collide.GetHitRectangle();
 
             if (direction.X > 0)
                 position.X = rec.X - originHit.X;

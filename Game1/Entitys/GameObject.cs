@@ -36,6 +36,11 @@ namespace Patrik.GameProject
             batch.Draw(texture, position, recDraw, Color.Red, rotation, originDraw, scale, SpriteEffects.None, 1.0f);
         }
 
+        public virtual bool Blocks(GameObject other)
+        {
+            return false;
+        }
+
         public Vector2 GetPosition() { return position; }
         public void SetPosition(Vector2 position) { this.position = position; }
 

@@ -62,32 +62,38 @@ namespace Game1.Scene
 
             Tile tile = spawns[rand.Next(0, spawns.Count)];
 
-            BaseEnemy e = new BaseEnemy(Globals.player, new Vector2(tile.GetRecHit().X - Tile.SIZE/2f, tile.GetRecHit().Y + Tile.SIZE / 2f), 100, 40, this);
+            BaseEnemy e = new BaseEnemy(Globals.player, new Vector2(tile.GetRecHit().X - Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), 100, 40, this);
             Enemies.Add(e);
         }
 
-        public System.Collections.Generic.ICollection<Rectangle> GetColliders(GameObject obj)
+        public System.Collections.Generic.ICollection<GameObject> GetColliders(GameObject obj)
         {
-            IList<Rectangle> colliders = new LinkedList<Rectangle>();
+            IList<GameObject> colliders = new LinkedList<GameObject>();
 
             // Get all possible colliders exept myself and bullets
-            colliders.AddRange(collisionCuller.GetPossibleColliders(obj)
-                .Where(x => x != obj && x.GetType() != typeof(Bullet))
-                .Select(x => x.GetHitRectangle()));
+            colliders.AddRange(collisionCuller.GetPossibleColliders(obj).Where(x => x != obj));
 
             // Tile colliders
-            for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
-            {
-                for (int x = 0; x < Map.getTileMap().GetLength(1); x++)
-                {
-                    if (Map.getTileMap()[x, y].GetTileType() != ETileType.WALL && Map.getTileMap()[x, y].GetTileType() != ETileType.CRATE)
-                        continue;
+            //for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
+            //{
+            //    for (int x = 0; x < Map.getTileMap().GetLength(1); x++)
+            //    {
+            //        if (Map.getTileMap()[x, y].GetTileType() != ETileType.WALL && Map.getTileMap()[x, y].GetTileType() != ETileType.CRATE)
+            //            continue;
 
-                    colliders.Add(Map.getTileMap()[x, y].GetRecHit());
-                }
-            }
+            //        colliders.Add(Map.getTileMap()[x, y].GetRecHit());
+            //    }
+            //}
 
-            return colliders.Where(x=> x.Intersects(obj.GetHitRectangle())).ToList();
+            // Add tiles collisions
+            var tileColliders = Map.GetPossibleColliders(obj.GetHitRectangle());
+            colliders.AddRange(tileColliders);
+
+            // At last only return those who intersects
+            return colliders.Where(x => obj.Blocks(x)
+                && x.GetHitRectangle()
+                .Intersects(obj.GetHitRectangle())).ToList();
+
         }
 
         public void Update(float delta)
@@ -119,8 +125,8 @@ namespace Game1.Scene
             // Should enemies block raycast?
             foreach (var enemy in Enemies.Where(x => x != origin))
             {
-                 if (segment.Collide(enemy.GetHitRectangle()))
-                     return false;
+                if (segment.Collide(enemy.GetHitRectangle()))
+                    return false;
             }
             return true;
         }
@@ -138,7 +144,7 @@ namespace Game1.Scene
             collisionCuller.ClearBuckets();
             collisionCuller.AddObject(Player);
             collisionCuller.AddObject(Enemies);
-           // TODO uncomment me collisionCuller.AddObject(BulletManager.GetBullets());
+            // TODO uncomment me collisionCuller.AddObject(BulletManager.GetBullets());
         }
 
         private void UpdateEnemies(float delta)
@@ -151,7 +157,7 @@ namespace Game1.Scene
             if (Enemies.Count < 7 && time > 5)
             {
                 time = 0;
-               SpawnEnemy();
+                SpawnEnemy();
             }
         }
 

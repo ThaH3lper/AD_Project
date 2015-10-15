@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Patrik.GameProject;
 
 namespace Game1.Datastructures.ADT
 {
@@ -10,7 +11,11 @@ namespace Game1.Datastructures.ADT
 
         void AddRange(IEnumerable<T> items);
 
+        //void AddRange(ICollection<Tile> tileColliders);
+
         T this[int key] { get; set; }
+
+       
 
         //bool Contains(T item);
 
