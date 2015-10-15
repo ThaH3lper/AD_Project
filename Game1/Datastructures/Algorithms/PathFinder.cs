@@ -141,7 +141,7 @@ namespace Game1.Datastructures.Algorithms
             if (tile == null)
                 return false;
 
-            if (tile.GetTileType() != ETileType.CRATE)
+            if (tile.GetTileType() != ETileType.WALL && tile.GetTileType() != ETileType.CRATE)
                 return true;
             else
                 return false;
