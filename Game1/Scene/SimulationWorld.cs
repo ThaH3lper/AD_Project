@@ -78,8 +78,7 @@ namespace Game1.Scene
             colliders.AddRange(tileColliders);
 
             // At last only return those who intersects
-            return colliders.Where(x => ( !x.Blocks(obj) || !obj.Blocks(x) )
-            && x.GetHitRectangle().Intersects(obj.GetHitRectangle())).ToList();
+            return colliders.Where(x => x.GetHitRectangle().Intersects(obj.GetHitRectangle()) &&  (x.Blocks(obj) || obj.Blocks(x) ) ).ToList();
 
         }
 
@@ -131,7 +130,7 @@ namespace Game1.Scene
             collisionCuller.ClearBuckets();
             collisionCuller.AddObject(Player);
             collisionCuller.AddObject(Enemies);
-            // TODO uncomment me collisionCuller.AddObject(BulletManager.GetBullets());
+            collisionCuller.AddObject(BulletManager.GetBullets());
         }
 
         private void UpdateEnemies(float delta)

@@ -18,9 +18,6 @@ namespace Game1.Entitys
 
         public override bool Blocks(GameObject other)
         {
-            if (other is Entity)
-                return true;
-
             return base.Blocks(other);
         }
 

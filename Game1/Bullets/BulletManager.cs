@@ -28,8 +28,12 @@ namespace Patrik.GameProject
             foreach (Bullet b in bullets)
             {
                 b.Update(delta);
-                //if (world.GetColliders(b).Count > 0)
-                 //   b.Dead = true;
+
+                if (world.GetColliders(b).Count > 0)
+                {
+                    //   b.Dead = true;
+                }
+
 
                 if (b.Dead)
                 {

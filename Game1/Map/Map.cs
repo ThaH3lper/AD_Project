@@ -28,17 +28,6 @@ namespace Patrik.GameProject
 
         public ICollection<Tile> GetPossibleColliders(Rectangle rectangle)
         {
-            //for (int y = 0; y < tileMap.GetLength(0); y++)
-            //{
-            //    for (int x = 0; x < tileMap.GetLength(1); x++)
-            //    {
-            //        if (tileMap[x, y].GetTileType() != ETileType.WALL && tileMap[x, y].GetTileType() != ETileType.CRATE)
-            //            continue;
-            //        if (tileMap[x, y].GetRecHit().Intersects(rectangle))
-            //            return tileMap[x, y];
-            //    }
-            //}
-
             ICollection<Tile> colliders = new LinkedList<Tile>();
 
             int tilesWidth = 1 + (rectangle.Width) / Tile.SIZE;
@@ -49,8 +38,10 @@ namespace Patrik.GameProject
             {
                 for (int x = 0; x <= tilesWidth; x++)
                 {
-                    int posX = x + rectangle.Left / Tile.SIZE;
-                    int posY = y + rectangle.Top / Tile.SIZE;
+                    int posX = MathHelper.Clamp(x + rectangle.Left / Tile.SIZE, 0, GetWidth() - 1);
+                    int posY = MathHelper.Clamp(y + rectangle.Top / Tile.SIZE, 0, GetHeight() - 1);
+
+
 
                     if (tileMap[posX, posY].GetTileType() != ETileType.WALL && tileMap[posX, posY].GetTileType() != ETileType.CRATE)
                         continue;
@@ -59,7 +50,6 @@ namespace Patrik.GameProject
                         colliders.Add(tileMap[posX, posY]);
                 }
             }
-
 
             return colliders;
         }

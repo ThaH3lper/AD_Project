@@ -52,7 +52,15 @@ namespace Patrik.GameProject
 
         public override bool Blocks(GameObject other)
         {
-            return base.Blocks(other);
+            if (other is Entity)
+                return true;
+
+            if (other is Bullet)
+            {
+                ((Bullet)other).Kill(this);
+            }
+
+            return true;
         }
 
         public void VerticalMove(float delta)

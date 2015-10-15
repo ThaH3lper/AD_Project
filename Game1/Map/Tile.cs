@@ -23,7 +23,14 @@ namespace Patrik.GameProject
 
         public override bool Blocks(GameObject other)
         {
-            return type == ETileType.WALL || type == ETileType.CRATE;
+            if (type == ETileType.WALL || type == ETileType.CRATE)
+            {
+                if (other is Bullet)
+                    ((Bullet)other).Kill(this);
+
+                return true;
+            }
+            return false;
         }
 
         public Rectangle GetRecHit() { return recHit; }
