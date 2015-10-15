@@ -2,6 +2,6 @@
 {
     public enum ETileType
     {
-        FLOOR, WALL, BOX, CRATE, SPAWN
+        FLOOR, WALL, CRATE, SPAWN
     }
 }
