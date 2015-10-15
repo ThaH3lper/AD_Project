@@ -16,7 +16,7 @@ namespace Patrik.GameProject
         public Tile(int x, int y, TileData data)
         {
             texture = data.Texture;
-            type = data.Type;
+            type = data.TileType;
             color = data.Tint;
 
             recHit = new Rectangle(x, y, SIZE, SIZE);

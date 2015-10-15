@@ -47,24 +47,37 @@ namespace Patrik.GameProject
 
         public bool Collide(Rectangle obj)
         {
-            float dst = DistanceFromPointToLineSegment(obj.Location.ToVector2(), start, end);
-            if (dst <= Math.Max(obj.Width, obj.Height) / 3.1f)
-            {
-                return true;
-            }
-            return false;
+            return LineIntersectsRect(start, end, obj);
         }
 
-        private float DistanceFromPointToLineSegment(Vector2 point, Vector2 anchor, Vector2 end)
+        public bool LineIntersectsRect(Vector2 p1, Vector2 p2, Rectangle r)
         {
-            Vector2 d = end - anchor;
-            float length = d.Length();
-            if (d == Vector2.Zero) return (point - anchor).Length();
-            d.Normalize();
-            float intersect = Vector2.Dot((point - anchor), d);
-            if (intersect < 0) return (point - anchor).Length();
-            if (intersect > length) return (point - end).Length();
-            return (point - (anchor + d * intersect)).Length();
+            return LineIntersectsLine(p1, p2, new Vector2(r.X, r.Y), new Vector2(r.X + r.Width, r.Y)) ||
+                   LineIntersectsLine(p1, p2, new Vector2(r.X + r.Width, r.Y), new Vector2(r.X + r.Width, r.Y + r.Height)) ||
+                   LineIntersectsLine(p1, p2, new Vector2(r.X + r.Width, r.Y + r.Height), new Vector2(r.X, r.Y + r.Height)) ||
+                   LineIntersectsLine(p1, p2, new Vector2(r.X, r.Y + r.Height), new Vector2(r.X, r.Y)) ||
+                   (r.Contains(p1) && r.Contains(p2));
+        }
+        private bool LineIntersectsLine(Vector2 l1p1, Vector2 l1p2, Vector2 l2p1, Vector2 l2p2)
+        {
+            float q = (l1p1.Y - l2p1.Y) * (l2p2.X - l2p1.X) - (l1p1.X - l2p1.X) * (l2p2.Y - l2p1.Y);
+            float d = (l1p2.X - l1p1.X) * (l2p2.Y - l2p1.Y) - (l1p2.Y - l1p1.Y) * (l2p2.X - l2p1.X);
+            if (d == 0)
+            {
+                return false;
+            }
+
+            float r = q / d;
+
+            q = (l1p1.Y - l2p1.Y) * (l1p2.X - l1p1.X) - (l1p1.X - l2p1.X) * (l1p2.Y - l1p1.Y);
+            float s = q / d;
+
+            if (r < 0 || r > 1 || s < 0 || s > 1)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
