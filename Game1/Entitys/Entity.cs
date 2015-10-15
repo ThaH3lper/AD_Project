@@ -19,7 +19,7 @@ namespace Patrik.GameProject
         {
             this.speed = speed;
             this.world = world;
-            this.weapon = new Weapon(world, this);
+            this.weapon = new Pistol(world, this);
         }
 
         public override void Update(float delta)
