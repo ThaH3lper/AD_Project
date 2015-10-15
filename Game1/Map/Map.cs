@@ -41,8 +41,8 @@ namespace Patrik.GameProject
 
             ICollection<Tile> colliders = new LinkedList<Tile>();
 
-            int tilesWidth = (rectangle.Right - rectangle.Left) / Tile.SIZE;
-            int tilesHeight = (rectangle.Bottom - rectangle.Top) / Tile.SIZE;
+            int tilesWidth = 1 + (rectangle.Width) / Tile.SIZE;
+            int tilesHeight = 1 + (rectangle.Height) / Tile.SIZE;
 
 
             for (int y = 0; y <= tilesHeight; y++)
@@ -57,7 +57,6 @@ namespace Patrik.GameProject
 
                     if (tileMap[posX, posY].GetRecHit().Intersects(rectangle))
                         colliders.Add(tileMap[posX, posY]);
-                            //return tileMap[posX, posY];
                 }
             }
 

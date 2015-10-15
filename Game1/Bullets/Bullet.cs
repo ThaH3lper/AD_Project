@@ -21,6 +21,17 @@ namespace Patrik.GameProject
             position = shooter.GetPosition() + (direction * shooter.GetMaxRadius());
         }
 
+        public override bool Blocks(GameObject other)
+        {
+            if (other is Tile)
+            {
+                Tile t = other as Tile;
+                if (t.GetTileType() == ETileType.CRATE)
+                    return false;
+            }
+            return true;
+        }
+
         public override void Update(float delta)
         {
             time += delta;
