@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Patrik.GameProject
 {
@@ -25,19 +26,43 @@ namespace Patrik.GameProject
             }
         }
 
-        public Tile GetCollidingTile(Rectangle rectangle)
+        public ICollection<Tile> GetPossibleColliders(Rectangle rectangle)
         {
-            for (int y = 0; y < tileMap.GetLength(0); y++)
+            //for (int y = 0; y < tileMap.GetLength(0); y++)
+            //{
+            //    for (int x = 0; x < tileMap.GetLength(1); x++)
+            //    {
+            //        if (tileMap[x, y].GetTileType() != ETileType.WALL && tileMap[x, y].GetTileType() != ETileType.CRATE)
+            //            continue;
+            //        if (tileMap[x, y].GetRecHit().Intersects(rectangle))
+            //            return tileMap[x, y];
+            //    }
+            //}
+
+            ICollection<Tile> colliders = new LinkedList<Tile>();
+
+            int tilesWidth = (rectangle.Right - rectangle.Left) / Tile.SIZE;
+            int tilesHeight = (rectangle.Bottom - rectangle.Top) / Tile.SIZE;
+
+
+            for (int y = 0; y < tilesHeight; y++)
             {
-                for (int x = 0; x < tileMap.GetLength(1); x++)
+                for (int x = 0; x < tilesWidth; x++)
                 {
-                    if (tileMap[x, y].GetTileType() != ETileType.WALL && tileMap[x, y].GetTileType() != ETileType.CRATE)
+                    int posX = x + rectangle.Left;
+                    int posY = y + rectangle.Top;
+
+                    if (tileMap[posX, posY].GetTileType() != ETileType.WALL && tileMap[posX, posY].GetTileType() != ETileType.CRATE)
                         continue;
-                    if (tileMap[x, y].GetRecHit().Intersects(rectangle))
-                        return tileMap[x, y];
+
+                    if (tileMap[posX, posY].GetRecHit().Intersects(rectangle))
+                        colliders.Add(tileMap[posX, posY]);
+                            //return tileMap[posX, posY];
                 }
             }
-            return null;
+
+
+            return colliders;
         }
 
         public Tile[,] getTileMap() { return tileMap; }

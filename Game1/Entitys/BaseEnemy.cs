@@ -21,7 +21,7 @@ namespace Game1.Entitys
             base.Update(delta);
 
 
-            if (world.RayCast(GetPosition(), world.Player.GetPosition()))
+            if (world.RayCast(this, world.Player))
             {
                 Face(world.Player.GetPosition());
                 Fire();

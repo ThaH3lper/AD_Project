@@ -66,7 +66,7 @@ namespace Game1.Scene
             Enemies.Add(e);
         }
 
-        public System.Collections.Generic.ICollection<Rectangle> GetColliders(Entity obj)
+        public System.Collections.Generic.ICollection<Rectangle> GetColliders(GameObject obj)
         {
             IList<Rectangle> colliders = new LinkedList<Rectangle>();
 
@@ -100,9 +100,9 @@ namespace Game1.Scene
             UpdateBullets(delta);
         }
 
-        public bool RayCast(Vector2 origin, Vector2 target)
+        public bool RayCast(GameObject origin, GameObject target)
         {
-            var segment = new Segment(origin, target);
+            var segment = new Segment(origin.GetPosition(), target.GetPosition());
 
             for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
             {
@@ -117,10 +117,10 @@ namespace Game1.Scene
             }
 
             // Should enemies block raycast?
-            foreach (var enemy in Enemies)
+            foreach (var enemy in Enemies.Where(x => x != origin))
             {
-                //  if (segment.Collide(enemy.GetHitRectangle()))
-                //     return false;
+                 if (segment.Collide(enemy.GetHitRectangle()))
+                     return false;
             }
             return true;
         }
