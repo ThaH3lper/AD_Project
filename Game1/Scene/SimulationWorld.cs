@@ -90,7 +90,7 @@ namespace Game1.Scene
             colliders.AddRange(tileColliders);
 
             // At last only return those who intersects
-            return colliders.Where(x => obj.Blocks(x)
+            return colliders.Where(x => x.Blocks(obj)
                 && x.GetHitRectangle()
                 .Intersects(obj.GetHitRectangle())).ToList();
 

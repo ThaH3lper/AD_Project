@@ -45,12 +45,12 @@ namespace Patrik.GameProject
             int tilesHeight = (rectangle.Bottom - rectangle.Top) / Tile.SIZE;
 
 
-            for (int y = 0; y < tilesHeight; y++)
+            for (int y = 0; y <= tilesHeight; y++)
             {
-                for (int x = 0; x < tilesWidth; x++)
+                for (int x = 0; x <= tilesWidth; x++)
                 {
-                    int posX = x + rectangle.Left;
-                    int posY = y + rectangle.Top;
+                    int posX = x + rectangle.Left / Tile.SIZE;
+                    int posY = y + rectangle.Top / Tile.SIZE;
 
                     if (tileMap[posX, posY].GetTileType() != ETileType.WALL && tileMap[posX, posY].GetTileType() != ETileType.CRATE)
                         continue;

@@ -50,6 +50,11 @@ namespace Patrik.GameProject
             base.Draw(batch);
         }
 
+        public override bool Blocks(GameObject other)
+        {
+            return base.Blocks(other);
+        }
+
         public void VerticalMove(float delta)
         {
             position.Y += direction.Y * speed * delta;

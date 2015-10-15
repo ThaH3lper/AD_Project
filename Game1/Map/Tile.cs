@@ -15,10 +15,15 @@ namespace Patrik.GameProject
             color = data.Tint;
         }
 
-        public void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);
             //batch.Draw(texture, recHit, color);
+        }
+
+        public override bool Blocks(GameObject other)
+        {
+            return type == ETileType.WALL || type == ETileType.CRATE;
         }
 
         public Rectangle GetRecHit() { return recHit; }
