@@ -16,25 +16,21 @@ namespace Patrik.GameProject
         private float currentTime;
         private bool fired;
 
-        Entity owner;
+        protected Entity owner;
 
         public Weapon(SimulationWorld world, Entity owner)
         {
             this.world = world;
             this.owner = owner;
-
-            //Test
-            cooldown = 0.5f;
         }
 
-        public virtual void Fire()
+        public virtual bool Fire()
         {
             if (fired == true)
-                return;
+                return false;
             fired = true;
             currentTime = 0;
-
-            world.SpawnBullet(owner);
+            return true;
         }
 
         public void Update(float delta)

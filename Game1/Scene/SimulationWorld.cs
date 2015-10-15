@@ -73,21 +73,21 @@ namespace Game1.Scene
             // Get all possible colliders exept myself and bullets
             colliders.AddRange(collisionCuller.GetPossibleColliders(obj).Where(x => x != obj));
 
-            // Tile colliders
-            //for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
-            //{
-            //    for (int x = 0; x < Map.getTileMap().GetLength(1); x++)
-            //    {
-            //        if (Map.getTileMap()[x, y].GetTileType() != ETileType.WALL && Map.getTileMap()[x, y].GetTileType() != ETileType.CRATE)
-            //            continue;
 
-            //        colliders.Add(Map.getTileMap()[x, y].GetRecHit());
-            //    }
-            //}
+            for (int y = 0; y < Map.getTileMap().GetLength(0); y++)
+            {
+                for (int x = 0; x < Map.getTileMap().GetLength(1); x++)
+                {
+                    if (Map.getTileMap()[x, y].GetTileType() != ETileType.WALL && Map.getTileMap()[x, y].GetTileType() != ETileType.CRATE)
+                        continue;
+
+                    colliders.Add(Map.getTileMap()[x, y]);
+                }
+            }
 
             // Add tiles collisions
-            var tileColliders = Map.GetPossibleColliders(obj.GetHitRectangle());
-            colliders.AddRange(tileColliders);
+            //var tileColliders = Map.GetPossibleColliders(obj.GetHitRectangle());
+            //colliders.AddRange(tileColliders);
 
             // At last only return those who intersects
             return colliders.Where(x => x.Blocks(obj)

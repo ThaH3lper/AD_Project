@@ -36,6 +36,8 @@ namespace Patrik.GameProject
         public virtual void Draw(SpriteBatch batch)
         {
             batch.Draw(texture, position, recDraw, color, rotation, originDraw, scale, SpriteEffects.None, 1.0f);
+
+            //batch.Draw(Globals.dot, recHit, Color.FromNonPremultiplied(new Vector4(1, 0, 0, 0.3f)));
         }
 
         public virtual bool Blocks(GameObject other)
