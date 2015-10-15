@@ -1,5 +1,6 @@
 ﻿using Game1.Datastructures.ADT;
 using Game1.Datastructures.Implementations;
+using Game1.Scene;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Patrik.GameProject
@@ -8,9 +9,11 @@ namespace Patrik.GameProject
     {
         private IList<Bullet> bullets;
         private IList<Bullet> deadBullets;
+        private SimulationWorld world;
 
-        public BulletManager()
+        public BulletManager(SimulationWorld world)
         {
+            this.world = world;
             bullets = new LinkedList<Bullet>();
             deadBullets = new LinkedList<Bullet>();
         }
@@ -25,6 +28,8 @@ namespace Patrik.GameProject
             foreach (Bullet b in bullets)
             {
                 b.Update(delta);
+                if (world.GetColliders(b).Count > 0)
+                    b.Dead = true;
 
                 if (b.Dead)
                 {

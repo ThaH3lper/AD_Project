@@ -6,14 +6,15 @@ namespace Patrik.GameProject
 {
     public class GameObject
     {
-        protected float speed, rotation, scale;
+        protected float rotation, scale;
         protected Vector2 direction, position, originHit, originDraw;
         protected Rectangle recHit, recDraw;
         protected Texture2D texture;
+        protected Color color;
 
-        public GameObject(Texture2D texture, Vector2 position, float speed, int size, Rectangle recDraw)
+        public GameObject(Texture2D texture, Vector2 position, int size, Rectangle recDraw)
         {
-            this.speed = speed;
+            this.color = Color.Red;
             this.position = position;
             this.recDraw = recDraw;
             this.texture = texture;
@@ -23,6 +24,7 @@ namespace Patrik.GameProject
             originDraw = new Vector2(recDraw.Width / 2, recDraw.Height / 2);
 
             scale = (size / (float)recDraw.Width);
+            recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
             rotation = 0;
         }
 
@@ -33,7 +35,7 @@ namespace Patrik.GameProject
 
         public virtual void Draw(SpriteBatch batch)
         {
-            batch.Draw(texture, position, recDraw, Color.Red, rotation, originDraw, scale, SpriteEffects.None, 1.0f);
+            batch.Draw(texture, position, recDraw, color, rotation, originDraw, scale, SpriteEffects.None, 1.0f);
         }
 
         public virtual bool Blocks(GameObject other)

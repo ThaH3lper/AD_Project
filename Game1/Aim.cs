@@ -12,6 +12,7 @@ namespace Patrik.GameProject
         Player player;
         Vector2 position;
         Hud hud;
+        int frame;
 
         public Aim(Player player, Hud hud)
         {
@@ -24,9 +25,14 @@ namespace Patrik.GameProject
             position = hud.WorldToHudPosition(player.PosAim);
         }
 
+        public void setAimCooldown(float cooldown)
+        {
+            frame = (int) (cooldown * 15.0f) + 1;
+        }
+
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Globals.aim, position, new Rectangle(32 * 16, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
+            batch.Draw(Globals.aim, position, new Rectangle(32 * frame, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
             batch.Draw(Globals.aim, position, new Rectangle(0 * 16, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
         }
     }
