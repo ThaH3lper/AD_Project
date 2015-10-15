@@ -24,6 +24,7 @@ namespace Patrik.GameProject
             originDraw = new Vector2(recDraw.Width / 2, recDraw.Height / 2);
 
             scale = (size / (float)recDraw.Width);
+
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
             rotation = 0;
         }
