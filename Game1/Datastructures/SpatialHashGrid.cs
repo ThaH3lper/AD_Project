@@ -6,6 +6,7 @@ using Patrik.GameProject;
 using Patrik.GameProject.Datastructures.Implementations;
 using System;
 using Game1.Entitys;
+using System.Linq;
 
 namespace Game1.Datastructures
 {
@@ -107,7 +108,7 @@ namespace Game1.Datastructures
 
         }
 
-        public IList<GameObject> GetPossibleColliders(GameObject obj)
+        public GameObject[] GetPossibleColliders(GameObject obj)
         {
             var objects = new LinkedList<GameObject>();
             var bucketIds = GetIdForObj(obj);
@@ -115,7 +116,7 @@ namespace Game1.Datastructures
             {
                 objects.AddRange(Buckets.Get(item));
             }
-            return objects;
+            return objects.Distinct().ToArray();
         }
 
 

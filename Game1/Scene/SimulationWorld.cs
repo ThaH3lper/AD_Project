@@ -62,7 +62,7 @@ namespace Game1.Scene
 
             Tile tile = spawns[rand.Next(0, spawns.Count)];
 
-            BaseEnemy e = new BaseEnemy(Globals.player, new Vector2(tile.GetRecHit().X - Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), 100, 40, this);
+            BaseEnemy e = new BaseEnemy(Globals.player, new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), 100, 40, this);
             Enemies.Add(e);
         }
 

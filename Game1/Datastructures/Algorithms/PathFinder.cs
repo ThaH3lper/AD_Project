@@ -105,6 +105,11 @@ namespace Game1.Datastructures.Algorithms
             return new List<Point>();
         }
 
+        /// <summary>
+        /// Returns available nodes, blocked nodes will be excluded.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         private System.Collections.Generic.IEnumerable<Point> GetNeighborNodes(Point node)
         {
             var nodes = new List<Point>();
