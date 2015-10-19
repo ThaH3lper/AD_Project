@@ -10,7 +10,8 @@ namespace Patrik.GameProject
     {
         protected SimulationWorld world;
 
-        protected float cooldown;
+        protected float cooldown, damage;
+        protected int size;
         protected string name;
 
         private float currentTime;
@@ -22,6 +23,7 @@ namespace Patrik.GameProject
         {
             this.world = world;
             this.owner = owner;
+            this.size = 10; //default size
         }
 
         public virtual bool Fire()
@@ -44,7 +46,9 @@ namespace Patrik.GameProject
         public float GetCooldownFloat()
         {
             float floatCooldown = currentTime / cooldown;
-            return (cooldown > 1) ? 1f : floatCooldown;
+            return (floatCooldown > 1) ? 1f : floatCooldown;
         }
+
+        public float GetDamage() { return damage; }
     }
 }

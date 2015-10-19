@@ -21,6 +21,8 @@ namespace Game1.Scene
 
         public IList<BaseEnemy> Enemies { get; set; }
 
+        private IList<BaseEnemy> deadEnemies;
+
         public PathFinder PathFinder { get; set; }
 
         private SpatialHashGrid collisionCuller;
@@ -34,6 +36,7 @@ namespace Game1.Scene
             this.Player = new Player(new Vector2(100, 100), this, input);
             this.BulletManager = new BulletManager(this);
             this.Enemies = new LinkedList<BaseEnemy>();
+            this.deadEnemies = new LinkedList<BaseEnemy>();
             this.PathFinder = new PathFinder(this);
             this.collisionCuller = new SpatialHashGrid();
             this.collisionCuller.Setup(Map.GetWidth() * Tile.SIZE, Map.GetHeight() * Tile.SIZE, (Map.GetWidth() * Tile.SIZE) / 6);
@@ -117,9 +120,9 @@ namespace Game1.Scene
             return true;
         }
 
-        public void SpawnBullet(Entity owner)
+        public void SpawnBullet(Entity owner, float offsetAngle, float damage, int size)
         {
-            BulletManager.addBullet(owner);
+            BulletManager.addBullet(owner, offsetAngle, damage, size);
         }
 
         /// <summary>
@@ -138,6 +141,8 @@ namespace Game1.Scene
             foreach (var enemy in Enemies)
             {
                 enemy.Update(delta);
+                if (enemy.Dead)
+                    deadEnemies.Add(enemy);
             }
 
             if (Enemies.Count < 7 && time > 5)
@@ -145,6 +150,10 @@ namespace Game1.Scene
                 time = 0;
                 SpawnEnemy();
             }
+
+            foreach (var deadEnemy in deadEnemies)
+                Enemies.Remove(deadEnemy);
+            deadEnemies.Clear();
         }
 
         private void UpdatePlayer(float delta)

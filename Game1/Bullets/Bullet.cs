@@ -9,17 +9,19 @@ namespace Patrik.GameProject
 {
     public class Bullet : GameObject
     {
-        float time, speed;
+        float time, speed, damage;
         private Entity owner;
 
         public bool Dead { get; set; }
 
-        public Bullet(Entity shooter) : base(Globals.bullet, shooter.GetPosition(), 10, new Rectangle(0, 0, 10, 5))
+        public Bullet(Entity shooter, float offsetAngle, float damage, int size) : base(Globals.bullet, shooter.GetPosition(), size, new Rectangle(0, 0, 10, 5))
         {
             this.owner = shooter;
             this.speed = 1600;
+            this.damage = damage;
+            this.color = Color.Red;
             rotation = shooter.GetRotation();
-            direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
+            direction = new Vector2((float)Math.Cos(rotation + offsetAngle), (float)Math.Sin(rotation + offsetAngle));
             position = shooter.GetPosition() + (direction * shooter.GetMaxRadius());
         }
 
@@ -63,6 +65,7 @@ namespace Patrik.GameProject
                     {
                         color = Color.Blue;
                         speed *= 0.8f;
+                        damage *= 0.8f;
                         return true;
                     }
                 }
@@ -73,5 +76,7 @@ namespace Patrik.GameProject
             }
             return false;
         }
+
+        public float GetDamage() { return damage; }
     }
 }

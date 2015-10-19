@@ -14,7 +14,7 @@ namespace Patrik.GameProject
 
         public GameObject(Texture2D texture, Vector2 position, int size, Rectangle recDraw)
         {
-            this.color = Color.Red;
+            this.color = Color.White;
             this.position = position;
             this.recDraw = recDraw;
             this.texture = texture;

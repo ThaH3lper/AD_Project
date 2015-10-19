@@ -32,8 +32,9 @@ namespace Patrik.GameProject
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Globals.aim, position, new Rectangle(32 * frame, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
-            batch.Draw(Globals.aim, position, new Rectangle(0 * 16, 0, 32, 32), Color.Blue, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
+            batch.Draw(Globals.aim, position, new Rectangle(16 * 32, 0, 32, 32), Color.FromNonPremultiplied(new Vector4(0.3f, 0.1f, 0.1f, 0.9f)), 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
+            batch.Draw(Globals.aim, position, new Rectangle(32 * frame, 0, 32, 32), Color.Red, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
+            batch.Draw(Globals.aim, position, new Rectangle(0 * 32, 0, 32, 32), Color.Red, 0f, new Vector2(16, 16), 1f, SpriteEffects.None, 1f);
         }
     }
 }

@@ -7,12 +7,12 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    class Pistol : Weapon
+    class ShotGun : Weapon
     {
-        public Pistol(SimulationWorld world, Entity owner) : base(world, owner)
+        public ShotGun(SimulationWorld world, Entity owner) : base(world, owner)
         {
-            cooldown = 0.4f;
-            damage = 50.0f;
+            cooldown = 0.5f;
+            damage = 40.0f;
         }
 
         public override bool Fire()
@@ -20,6 +20,8 @@ namespace Patrik.GameProject
             if(base.Fire())
             { 
                 world.SpawnBullet(owner, 0, damage, size);
+                world.SpawnBullet(owner, ((float) Math.PI / 180 * 10), damage, size);
+                world.SpawnBullet(owner, ((float) Math.PI / 180 * -10), damage, size);
             }
             return true;
         }

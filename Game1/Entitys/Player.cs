@@ -19,6 +19,10 @@ namespace Patrik.GameProject
         {
             this.input = input;
             PosAim = position;
+
+            this.health = 100;
+            this.color = Color.Green;
+            this.weapon = new Bazooka(world, this);
         }
 
         public override void Update(float delta)

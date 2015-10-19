@@ -7,12 +7,13 @@ using System.Text;
 
 namespace Patrik.GameProject
 {
-    class Pistol : Weapon
+    class Bazooka : Weapon
     {
-        public Pistol(SimulationWorld world, Entity owner) : base(world, owner)
+        public Bazooka(SimulationWorld world, Entity owner) : base(world, owner)
         {
-            cooldown = 0.4f;
-            damage = 50.0f;
+            cooldown = 1.4f;
+            damage = 200.0f;
+            size = 20;
         }
 
         public override bool Fire()

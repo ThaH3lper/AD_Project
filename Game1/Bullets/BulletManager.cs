@@ -1,7 +1,9 @@
 ﻿using Game1.Datastructures.ADT;
 using Game1.Datastructures.Implementations;
+using Game1.Entitys;
 using Game1.Scene;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 
 namespace Patrik.GameProject
 {
@@ -18,9 +20,9 @@ namespace Patrik.GameProject
             deadBullets = new LinkedList<Bullet>();
         }
 
-        public void addBullet(Entity shooter)
+        public void addBullet(Entity shooter, float offsetAngle, float damage, int size)
         {
-            bullets.Add(new Bullet(shooter));
+            bullets.Add(new Bullet(shooter, offsetAngle, damage, size));
         }
 
         public void Update(float delta)
@@ -29,9 +31,17 @@ namespace Patrik.GameProject
             {
                 b.Update(delta);
 
-                if (world.GetColliders(b).Count > 0)
+                System.Collections.Generic.ICollection<GameObject> colliders = world.GetColliders(b);
+                if (colliders.Count > 0)
                 {
-                    //   b.Dead = true;
+                    foreach (var obj in colliders)
+                    {
+                        if (obj is Entity)
+                        {
+                            Entity e = (Entity)obj;
+                            e.Damage(b.GetDamage());
+                        }
+                    }
                 }
 
 

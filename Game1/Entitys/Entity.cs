@@ -13,7 +13,9 @@ namespace Patrik.GameProject
     {
         protected SimulationWorld world;
         protected Weapon weapon;
-        protected float speed;
+        protected float speed, health;
+
+        public bool Dead { get; set; }
 
         public Entity(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, size, new Rectangle(0, 0, 64, 64))
         {
@@ -114,6 +116,15 @@ namespace Patrik.GameProject
         public void Face(Vector2 target)
         {
             rotation = (float)Math.Atan2(target.Y - position.Y, target.X - position.X);
+        }
+        public void Damage(float damage)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                health = 0;
+                Dead = true;
+            }
         }
     }
 }
