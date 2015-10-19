@@ -9,12 +9,12 @@ namespace Game1.Entitys
     public class BaseEnemy : Entity
     {
         public static readonly float ENEMY_STOP_RANGE = Tile.SIZE * 2.1f;
-
         private Vector2 target;
 
         public BaseEnemy(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, world)
         {
-            health = 75;
+            health = 100;
+            color = Color.Red;
         }
 
         public override bool Blocks(GameObject other)

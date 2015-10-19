@@ -61,7 +61,6 @@ namespace Patrik.GameProject
         }
         public Vector2 GetPosCamera()
         {
-            Console.WriteLine(mouseState.X + " - " + mouseState.Y);
             return camera.UnProject(new Vector2(mouseState.X, mouseState.Y));
         }
         public Vector2 GetPosScreen()

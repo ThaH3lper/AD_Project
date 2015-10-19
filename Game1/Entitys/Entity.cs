@@ -13,7 +13,7 @@ namespace Patrik.GameProject
     {
         protected SimulationWorld world;
         protected Weapon weapon;
-        protected float speed, health;
+        protected float speed, health, maxHealth;
 
         public bool Dead { get; set; }
 
