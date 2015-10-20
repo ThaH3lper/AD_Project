@@ -13,8 +13,6 @@ namespace Game1.Entitys
 
         public BaseEnemy(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, world)
         {
-            health = 100;
-            color = Color.Red;
         }
 
         public override bool Blocks(GameObject other)

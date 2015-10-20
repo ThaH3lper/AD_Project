@@ -11,7 +11,8 @@ namespace Game1.Entitys
     {
         public FastEnemy(Vector2 position, SimulationWorld world) : base(Globals.player, position, 200, 30, world)
         {
-            
+            health = 70;
+            maxHealth = 70;
             color = Color.Pink;
         }
 

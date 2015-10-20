@@ -65,7 +65,16 @@ namespace Game1.Scene
 
             Tile tile = spawns[rand.Next(0, spawns.Count)];
 
-            BaseEnemy e = new FastEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+            BaseEnemy e = null;
+            switch (rand.Next(0, 3))
+            {
+                case 0: e = new FastEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+                    break;
+                case 2: e = new SlowEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+                    break;
+                default: e = new NormalEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+                    break;
+            }
             Enemies.Add(e);
         }
 
