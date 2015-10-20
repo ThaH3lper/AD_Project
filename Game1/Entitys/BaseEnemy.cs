@@ -31,20 +31,19 @@ namespace Game1.Entitys
             {
                 Face(world.Player.GetPosition());
                 Fire();
+
+                float dst = (world.Player.GetPosition() - position).Length();
+                if (dst < ENEMY_STOP_RANGE)
+                {
+                    target = Vector2.Zero;
+                    direction = Vector2.Zero;
+                    return;
+                }
             }
             else
             {
                 rotation = (float)Math.Atan2(direction.Y, direction.X);
             }
-
-            float dst = (world.Player.GetPosition() - position).Length();
-            if (dst < ENEMY_STOP_RANGE)
-            {
-                target = Vector2.Zero;
-                direction = Vector2.Zero;
-                return;
-            }
-
 
             if (target != Vector2.Zero && (target - position).Length() > 2)
             {

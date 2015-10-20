@@ -38,6 +38,8 @@ namespace Patrik.GameProject
                     {
                         if (obj is Entity)
                         {
+                            if (obj is BaseEnemy && b.GetOwner() is BaseEnemy)
+                                continue;
                             Entity e = (Entity)obj;
                             e.Damage(b.GetDamage());
                         }

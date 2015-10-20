@@ -78,5 +78,7 @@ namespace Patrik.GameProject
         }
 
         public float GetDamage() { return damage; }
+
+        public Entity GetOwner() { return owner; }
     }
 }

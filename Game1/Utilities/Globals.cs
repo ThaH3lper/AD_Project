@@ -61,7 +61,7 @@ class Globals
 
         char[,] charMap = new char[width, height];
         int x = 0;
-        int y = 0;
+        int y = height-1;
         foreach (string s in strings)
         {
             foreach (char c in s)
@@ -69,7 +69,7 @@ class Globals
                 charMap[x, y] = c;
                 x++;
             }
-            y++;
+            y--;
             x = 0;
         }
         map = new Map(width, height, charMap);
