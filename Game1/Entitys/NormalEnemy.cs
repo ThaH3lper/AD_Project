@@ -10,7 +10,7 @@ namespace Game1.Entitys
         {
             health = 150;
             maxHealth = 150;
-            color = Color.Red;
+            color = Color.DarkOliveGreen;
         }
 
         public override void Update(float delta)

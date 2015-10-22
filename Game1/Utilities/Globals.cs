@@ -31,7 +31,7 @@ class Globals
         aim = game.Content.Load<Texture2D>("aim");
 
         // Init tiles 
-        tileTable.Put('O', new TileData(ETileType.FLOOR, dot, Color.LightGray));
+        tileTable.Put('O', new TileData(ETileType.FLOOR, dot, Color.DarkGray));
         tileTable.Put('W', new TileData(ETileType.WALL, dot, Color.Black));
         tileTable.Put('S', new TileData(ETileType.SPAWN, dot, Color.Red));
         tileTable.Put('C', new TileData(ETileType.CRATE, create, Color.Brown));

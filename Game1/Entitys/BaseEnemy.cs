@@ -13,6 +13,18 @@ namespace Game1.Entitys
 
         public BaseEnemy(Texture2D texture, Vector2 position, float speed, int size, SimulationWorld world) : base(texture, position, speed, size, world)
         {
+            var rand = new Random();
+            switch(rand.Next(0, 4))
+            {
+                case 0: weapon = new ShotGun(world, this);
+                    break;
+                case 1: weapon = new Bazooka(world, this);
+                    break;
+                case 2: weapon = new Rifle(world, this);
+                    break;
+                default: weapon = new Pistol(world, this);
+                    break;
+            }
         }
 
         public override bool Blocks(GameObject other)

@@ -14,12 +14,12 @@ namespace Patrik.GameProject
 
         public bool Dead { get; set; }
 
-        public Bullet(Entity shooter, float offsetAngle, float damage, int size) : base(Globals.bullet, shooter.GetPosition(), size, new Rectangle(0, 0, 10, 5))
+        public Bullet(Entity shooter, float offsetAngle, float damage, int size, Color color) : base(Globals.bullet, shooter.GetPosition(), size, new Rectangle(0, 0, 10, 5))
         {
             this.owner = shooter;
-            this.speed = 1600;
+            this.speed = 800;
             this.damage = damage;
-            this.color = Color.Red;
+            this.color = color;
             rotation = shooter.GetRotation();
             direction = new Vector2((float)Math.Cos(rotation + offsetAngle), (float)Math.Sin(rotation + offsetAngle));
             position = shooter.GetPosition() + (direction * shooter.GetMaxRadius());
@@ -64,7 +64,7 @@ namespace Patrik.GameProject
                     if (t.GetTileType() == ETileType.CRATE)
                     {
                         color = Color.Blue;
-                        speed *= 0.8f;
+                        speed *= 0.9f;
                         damage *= 0.8f;
                         return true;
                     }

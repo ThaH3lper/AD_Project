@@ -61,5 +61,7 @@ namespace Patrik.GameProject
         public Rectangle GetHitRectangle() { return recHit;  }
 
         public float GetRotation() { return rotation; }
+
+        public Color GetColor() { return color; }
     }
 }

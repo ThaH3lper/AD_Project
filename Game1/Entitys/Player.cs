@@ -23,7 +23,7 @@ namespace Patrik.GameProject
             color = Color.Gold;
             this.health = 100;
             this.maxHealth = 100;
-            this.weapon = new Pistol(world, this);
+            this.weapon = new Rifle(world, this);
 
         }
 

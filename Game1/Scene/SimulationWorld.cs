@@ -129,9 +129,9 @@ namespace Game1.Scene
             return true;
         }
 
-        public void SpawnBullet(Entity owner, float offsetAngle, float damage, int size)
+        public void SpawnBullet(Entity owner, float offsetAngle, float damage, int size, Color color)
         {
-            BulletManager.addBullet(owner, offsetAngle, damage, size);
+            BulletManager.addBullet(owner, offsetAngle, damage, size, color);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Game1.Scene
                     deadEnemies.Add(enemy);
             }
 
-            if (Enemies.Count < 7 && time > 5)
+            if (Enemies.Count < 20 && time > 5)
             {
                 time = 0;
                 SpawnEnemy();

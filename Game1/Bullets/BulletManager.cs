@@ -2,6 +2,7 @@
 using Game1.Datastructures.Implementations;
 using Game1.Entitys;
 using Game1.Scene;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 
@@ -20,9 +21,9 @@ namespace Patrik.GameProject
             deadBullets = new LinkedList<Bullet>();
         }
 
-        public void addBullet(Entity shooter, float offsetAngle, float damage, int size)
+        public void addBullet(Entity shooter, float offsetAngle, float damage, int size, Color color)
         {
-            bullets.Add(new Bullet(shooter, offsetAngle, damage, size));
+            bullets.Add(new Bullet(shooter, offsetAngle, damage, size, color));
         }
 
         public void Update(float delta)

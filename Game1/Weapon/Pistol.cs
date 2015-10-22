@@ -18,8 +18,8 @@ namespace Patrik.GameProject
         public override bool Fire()
         {
             if(base.Fire())
-            { 
-                world.SpawnBullet(owner, 0, damage, size);
+            {
+                world.SpawnBullet(owner, 0, damage, size, owner.GetColor());
             }
             return true;
         }

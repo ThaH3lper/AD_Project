@@ -1,4 +1,5 @@
 ﻿using Game1.Scene;
+using Microsoft.Xna.Framework;
 using Patrik.GameProject;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace Patrik.GameProject
         public override bool Fire()
         {
             if(base.Fire())
-            { 
-                world.SpawnBullet(owner, 0, damage, size);
-                world.SpawnBullet(owner, ((float) Math.PI / 180 * 10), damage, size);
-                world.SpawnBullet(owner, ((float) Math.PI / 180 * -10), damage, size);
+            {
+                world.SpawnBullet(owner, 0, damage, size, owner.GetColor());
+                world.SpawnBullet(owner, ((float)Math.PI / 180 * 10), damage, size, owner.GetColor());
+                world.SpawnBullet(owner, ((float)Math.PI / 180 * -10), damage, size, owner.GetColor());
             }
             return true;
         }
