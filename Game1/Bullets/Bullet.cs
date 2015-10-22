@@ -42,7 +42,7 @@ namespace Patrik.GameProject
             time += delta;
 
             // remove after time T
-            if (time > 1f || speed < 100)
+            if (time > 10f || speed < 100)
             {
                 Dead = true;
             }

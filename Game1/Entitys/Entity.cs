@@ -70,12 +70,6 @@ namespace Patrik.GameProject
             position.Y += direction.Y * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
 
-            //Tile colliding = world.Map.GetCollidingTile(recHit);
-            //if (colliding == null)
-            //    return;
-
-            //Rectangle rec = colliding.GetRecHit();
-
             var collide = world.GetColliders(this).Where(x => !(x is Bullet)).FirstOrDefault();
 
             if (collide == null)
@@ -93,12 +87,6 @@ namespace Patrik.GameProject
         {
             position.X += direction.X * speed * delta;
             recHit = new Rectangle((int)(position.X - originHit.X), (int)(position.Y - originHit.Y), recHit.Width, recHit.Height);
-
-            //Tile colliding = world.Map.GetCollidingTile(recHit);
-            //if (colliding == null)
-            //    return;
-
-            //Rectangle rec = colliding.GetRecHit();
 
             var collide = world.GetColliders(this).Where(x => !(x is Bullet)).FirstOrDefault();
 
@@ -125,6 +113,8 @@ namespace Patrik.GameProject
                 health = 0;
                 Dead = true;
             }
+            int frame = 9-(int)(9 * health / maxHealth);
+            recDraw = new Rectangle(64 * frame, 0, 64, 64);
         }
     }
 }

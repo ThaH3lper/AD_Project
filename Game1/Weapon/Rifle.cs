@@ -11,8 +11,8 @@ namespace Patrik.GameProject
     {
         public Rifle(SimulationWorld world, Entity owner) : base(world, owner)
         {
-            cooldown = 0.05f;
-            damage = 5f;
+            cooldown = 0.15f;
+            damage = 10f;
         }
 
         public override bool Fire()

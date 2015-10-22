@@ -21,10 +21,9 @@ namespace Patrik.GameProject
             PosAim = position;
 
             color = Color.Gold;
-            this.health = 100;
-            this.maxHealth = 100;
+            this.health = 1000;
+            this.maxHealth = 1000;
             this.weapon = new Rifle(world, this);
-
         }
 
         public override void Update(float delta)
