@@ -20,6 +20,8 @@ class Globals
 
     public static IMap<Player.Commands, IList<Keys>> inputTable = new Hashtable<Player.Commands, IList<Keys>>();
 
+    public static SpriteFont font;
+
     public static void LoadContent(MainGame game)
     {
         // Load assets
@@ -29,6 +31,7 @@ class Globals
         create = game.Content.Load<Texture2D>("create");
         bullet = game.Content.Load<Texture2D>("bullet");
         aim = game.Content.Load<Texture2D>("aim");
+        font = game.Content.Load<SpriteFont>("spriteFont");
 
         // Init tiles 
         tileTable.Put('O', new TileData(ETileType.FLOOR, dot, Color.DarkGray));

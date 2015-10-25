@@ -20,6 +20,10 @@ namespace Patrik.GameProject
             bullets = new LinkedList<Bullet>();
             deadBullets = new LinkedList<Bullet>();
         }
+        public void ClearBullets()
+        {
+            bullets.Clear();
+        }
 
         public void addBullet(Entity shooter, float offsetAngle, float damage, int size, Color color)
         {

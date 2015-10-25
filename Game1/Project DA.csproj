@@ -53,6 +53,7 @@
     <Compile Include="Entitys\Collision\Segment.cs" />
     <Compile Include="Entitys\Player.cs" />
     <Compile Include="Hud\Hud.cs" />
+    <Compile Include="Hud\MainMenu.cs" />
     <Compile Include="Map\ETileType.cs" />
     <Compile Include="Scene\EScene.cs" />
     <Compile Include="Scene\GameScene.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Spawner.cs" />
     <Compile Include="Weapon\Bazooka.cs" />
     <Compile Include="Weapon\Rifle.cs" />
     <Compile Include="Weapon\ShotGun.cs" />
@@ -111,6 +113,7 @@
     <None Include="Content\level.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\spriteFont.spritefont" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

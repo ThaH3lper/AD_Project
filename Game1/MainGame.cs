@@ -10,6 +10,7 @@ namespace Patrik.GameProject
         SpriteBatch spriteBatch;
 
         private static StandardScene currentScene;
+        public static MainGame game;
 
         public MainGame()
         {
@@ -18,6 +19,7 @@ namespace Patrik.GameProject
             graphics.PreferredBackBufferWidth = Globals.GAME_WIDTH;
             graphics.ApplyChanges();
 
+            game = this;
             Window.Title = Globals.TITLE;
 
             Content.RootDirectory = "Content";

@@ -27,7 +27,6 @@ namespace Game1.Scene
 
         private SpatialHashGrid collisionCuller;
         private Inputs input;
-        private float time;
 
         public SimulationWorld(Inputs input)
         {
@@ -40,17 +39,18 @@ namespace Game1.Scene
             this.PathFinder = new PathFinder(this);
             this.collisionCuller = new SpatialHashGrid();
             this.collisionCuller.Setup(Map.GetWidth() * Tile.SIZE, Map.GetHeight() * Tile.SIZE, (Map.GetWidth() * Tile.SIZE) / 6);
-
-            InitEnemies();
         }
 
-        private void InitEnemies()
+        public void ClearBullets()
         {
-            SpawnEnemy();
-
+            BulletManager.ClearBullets();
+        }
+        public void ClearEnemys()
+        {
+            Enemies.Clear();
         }
 
-        private void SpawnEnemy()
+        public void SpawnEnemy()
         {
             var spawns = new LinkedList<Tile>();
             foreach (var item in Map.getTileMap())
@@ -96,8 +96,6 @@ namespace Game1.Scene
 
         public void Update(float delta)
         {
-            this.time += delta;
-
             UpdateCollisionCuller();
             UpdatePlayer(delta);
             UpdateEnemies(delta);
@@ -152,12 +150,6 @@ namespace Game1.Scene
                 enemy.Update(delta);
                 if (enemy.Dead)
                     deadEnemies.Add(enemy);
-            }
-
-            if (Enemies.Count < 20 && time > 5)
-            {
-                time = 0;
-                SpawnEnemy();
             }
 
             foreach (var deadEnemy in deadEnemies)

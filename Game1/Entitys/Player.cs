@@ -49,6 +49,13 @@ namespace Patrik.GameProject
             base.Update(delta);
         }
 
+        public void HealFullHealth()
+        {
+            health = maxHealth;
+            Dead = false;
+            Damage(0);
+        }
+
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);

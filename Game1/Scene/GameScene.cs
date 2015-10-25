@@ -19,17 +19,18 @@ namespace Patrik.GameProject
         public GameScene(GraphicsDeviceManager gdm, MainGame game) : base(gdm, game)
         {
             this.world = new SimulationWorld(input);
-            this.hud = new Hud(camera, hudCamera, world);
+            this.hud = new Hud(camera, hudCamera, input, world);
         }
 
       
         public override void Update(float delta)
         {
             world.Update(delta);
-            hud.Update(delta);
             UpdateCamera();
 
             base.Update(delta);
+
+            hud.Update(delta);
         }
 
         private void UpdateCamera()
