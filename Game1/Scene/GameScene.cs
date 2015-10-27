@@ -53,6 +53,11 @@ namespace Patrik.GameProject
                 enemy.Draw(batch);
             }
 
+            foreach (var power in world.Powers)
+            {
+                power.Draw(batch);
+            }
+
             batch.End();
 
             batch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, hudCamera.Transform);
