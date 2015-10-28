@@ -3,6 +3,7 @@ using Game1.Datastructures.ADT;
 using Game1.Datastructures.Algorithms;
 using Game1.Datastructures.Implementations;
 using Game1.Entitys;
+using Game1.Entitys.Powers;
 using Microsoft.Xna.Framework;
 using Patrik.GameProject;
 using System;
@@ -21,12 +22,16 @@ namespace Game1.Scene
 
         public IList<BaseEnemy> Enemies { get; set; }
 
+        public IList<BasePower> Powers { get; set; }
+
         private IList<BaseEnemy> deadEnemies;
 
         public PathFinder PathFinder { get; set; }
 
         private SpatialHashGrid collisionCuller;
         private Inputs input;
+
+        public int PlayerScore { get; set; }
 
         public SimulationWorld(Inputs input)
         {
@@ -35,6 +40,7 @@ namespace Game1.Scene
             this.Player = new Player(new Vector2(100, 100), this, input);
             this.BulletManager = new BulletManager(this);
             this.Enemies = new LinkedList<BaseEnemy>();
+            this.Powers = new LinkedList<BasePower>();
             this.deadEnemies = new LinkedList<BaseEnemy>();
             this.PathFinder = new PathFinder(this);
             this.collisionCuller = new SpatialHashGrid();
@@ -68,11 +74,14 @@ namespace Game1.Scene
             BaseEnemy e = null;
             switch (rand.Next(0, 3))
             {
-                case 0: e = new FastEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+                case 0:
+                    e = new FastEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
                     break;
-                case 2: e = new SlowEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+                case 2:
+                    e = new SlowEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
                     break;
-                default: e = new NormalEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
+                default:
+                    e = new NormalEnemy(new Vector2(tile.GetRecHit().X + Tile.SIZE / 2f, tile.GetRecHit().Y + Tile.SIZE / 2f), this);
                     break;
             }
             Enemies.Add(e);
@@ -90,7 +99,7 @@ namespace Game1.Scene
             colliders.AddRange(tileColliders);
 
             // At last only return those who intersects
-            return colliders.Where(x => x.GetHitRectangle().Intersects(obj.GetHitRectangle()) &&  (x.Blocks(obj) || obj.Blocks(x) ) ).ToList();
+            return colliders.Where(x => x.GetHitRectangle().Intersects(obj.GetHitRectangle()) && (x.Blocks(obj) || obj.Blocks(x))).ToList();
 
         }
 
@@ -100,6 +109,7 @@ namespace Game1.Scene
             UpdatePlayer(delta);
             UpdateEnemies(delta);
             UpdateBullets(delta);
+            UpdatePowers(delta);
         }
 
         public bool RayCast(GameObject origin, GameObject target)
@@ -153,7 +163,10 @@ namespace Game1.Scene
             }
 
             foreach (var deadEnemy in deadEnemies)
+            {
                 Enemies.Remove(deadEnemy);
+                PlayerScore += (int)(deadEnemy.GetMaxRadius() * 10);
+            }
             deadEnemies.Clear();
         }
 
@@ -168,6 +181,44 @@ namespace Game1.Scene
 
             if (input.LeftPressed())
                 Player.Fire();
+        }
+
+        private void UpdatePowers(float delta)
+        {
+            foreach (var power in Powers)
+            {
+                power.Update(delta);
+                if (Player.GetHitRectangle().Intersects(power.GetHitRectangle()))
+                {
+                    power.onPickup(Player);
+                    Powers.Remove(power);
+                    break;
+                }
+            }
+
+            Random rnd = new Random();
+            if (Powers.Count < 1 && rnd.NextDouble() < 0.004)
+            {
+                while (true)
+                {
+                    int x = rnd.Next(1, Map.GetWidth());
+                    int y = rnd.Next(1, Map.GetHeight());
+
+                    if (!Map.getTileMap()[x,y].Blocks(Player))
+                    {
+                        switch (rnd.Next(0, 1))
+                        {
+                            case 0:
+                                Powers.Add(new WeaponCase(new Vector2(x * Tile.SIZE + Tile.SIZE/2, y * Tile.SIZE + Tile.SIZE / 2), 32, this));
+                                break;
+                            default:
+                                Powers.Add(new WeaponCase(new Vector2(x * Tile.SIZE + Tile.SIZE / 2, y * Tile.SIZE + Tile.SIZE / 2), 32, this));
+                                break;
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
     }

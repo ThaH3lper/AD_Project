@@ -36,12 +36,15 @@ namespace Patrik.GameProject
         {
             menu = false;
             spawner = new Spawner(world);
+            scoreLerp = 0;
         }
+
         public void GameOver()
         {
             world.ClearBullets();
             world.ClearEnemys();
             world.Player.HealFullHealth();
+            world.Powers.Clear();
 
             menu = true;
             spawner = null;
@@ -73,10 +76,18 @@ namespace Patrik.GameProject
         public void Render(SpriteBatch batch)
         {
             aim.Draw(batch);
+            DrawScore(batch);
             if (menu)
             {
                 mainMenu.Render(batch);
             }
+        }
+
+        private float scoreLerp;
+        private void DrawScore(SpriteBatch batch)
+        {
+            scoreLerp = MathHelper.Lerp(scoreLerp, world.PlayerScore + 1, 0.06f);
+            batch.DrawString(Globals.font, "Score: " + (int)scoreLerp, new Vector2(-60,-350), Color.Red, 0, new Vector2(0,0), 1.5f, SpriteEffects.None, 1f);
         }
     }
 }

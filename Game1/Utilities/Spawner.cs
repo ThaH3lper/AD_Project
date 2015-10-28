@@ -17,6 +17,7 @@ namespace Game1.Utilities
             this.timeAlive = 0;
             this.interval = 7f;
             this.spawned = 0;
+            world.PlayerScore = 0;
         }
 
         public void Update(float delta)

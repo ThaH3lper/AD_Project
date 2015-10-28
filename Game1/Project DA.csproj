@@ -39,6 +39,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entitys\FastEnemy.cs" />
+    <Compile Include="Entitys\Powers\BasePower.cs" />
+    <Compile Include="Entitys\Powers\WeaponCase.cs" />
     <Compile Include="Entitys\SlowEnemy.cs" />
     <Compile Include="Entitys\NormalEnemy.cs" />
     <Compile Include="Hud\Aim.cs" />

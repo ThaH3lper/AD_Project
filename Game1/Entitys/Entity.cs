@@ -46,6 +46,10 @@ namespace Patrik.GameProject
         {
             return weapon;
         }
+        public void SetWeapon(Weapon weapon)
+        {
+            this.weapon = weapon;
+        }
 
         public override void Draw(SpriteBatch batch)
         {
